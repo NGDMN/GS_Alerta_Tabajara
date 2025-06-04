@@ -1,48 +1,78 @@
--- SCHEMA UNIFICADO PARA O SISTEMA DE ALERTAS TABAJARA
+-- =====================================================
+-- SCHEMA CORRIGIDO PARA O SISTEMA DE ALERTAS TABAJARA
+-- Banco: SQLite  
+-- Versão: 1.1 (Corrigida)
+-- =====================================================
 
---Tabela de Estados
-CREATE TABLE IF NOT EXISTS Estados (
-    id_estado SERIAL PRIMARY KEY,
+-- Tabela de Estados
+CREATE TABLE IF NOT EXISTS estados (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome VARCHAR(100) NOT NULL,
     sigla VARCHAR(2) NOT NULL,
-    latitude NUMERIC NOT NULL,
-    longitude NUMERIC NOT NULL,
-    população NUMERIC NOT NULL,
-    fuso VARCHAR(6) NOT NULL,
-    costa VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-)
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    populacao INTEGER NOT NULL,
+    fuso_horario VARCHAR(10) NOT NULL,
+    tipo_costa VARCHAR(20) NOT NULL,
+    ondas_normal REAL DEFAULT 1.0,
+    ventos_tipicos REAL DEFAULT 15.0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
---Tabela de Sensores
-CREATE TABLE IF NOT EXISTS Sensores(
-    id_sensores SERIAL PRIMARY KEY,
-    id_estado
-    latitude NUMERIC,
-    longitude NUMERIC,
-    hr_coleta TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    temperatura NUMERIC,
-    umidade NUMERIC,
-    precipitação NUMERIC,
-    velocidade_vento NUMERIC,
-    direção_vento VARCHAR,
-    nível_mar NUMERIC,
-    altura_ondas NUMERIC,
-    magnitude_sísmica NUMERIC,
-    pressão_atm NUMERIC,
-)
+-- Tabela de Sensores
+CREATE TABLE IF NOT EXISTS sensores (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    estado_id INTEGER NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    timestamp_coleta DATETIME DEFAULT CURRENT_TIMESTAMP,
+    temperatura REAL,
+    umidade REAL,
+    precipitacao REAL,
+    velocidade_vento REAL,
+    direcao_vento INTEGER,
+    nivel_mar REAL,
+    altura_ondas REAL,
+    magnitude_sismica REAL,
+    pressao_atmosferica REAL,
+    FOREIGN KEY (estado_id) REFERENCES estados(id)
+);
 
---Tabela de abrigos
-CREATE TABLE IF NOT EXISTS Abrigos(
-    id_abrigos SERIAL PRIMARY KEY,
-    id_estado
+-- Tabela de Abrigos
+CREATE TABLE IF NOT EXISTS abrigos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    estado_id INTEGER NOT NULL,
     nome VARCHAR(100) NOT NULL,
-    tipo VARCHAR(100) NOT NULL,
-    latitude NUMERIC NOT NULL,
-    longitude NUMERIC NOT NULL,
-    capacidade NUMERIC NOT NULL,
-    ocupação NUMERIC NOT NULL,
-    contato VARCHAR(9) NOT NULL,
-    acessibilidade VARCHAR(100) NOT NULL,
-    recursos VARCHAR(2000),
-)
+    tipo VARCHAR(50) NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    capacidade INTEGER NOT NULL,
+    ocupacao INTEGER DEFAULT 0,
+    contato VARCHAR(15),
+    recursos TEXT,
+    ativo BOOLEAN DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (estado_id) REFERENCES estados(id)
+);
+
+-- =====================================================
+-- ÍNDICES PARA PERFORMANCE
+-- =====================================================
+
+-- Índices para consultas rápidas
+CREATE INDEX IF NOT EXISTS idx_sensores_estado ON sensores(estado_id);
+CREATE INDEX IF NOT EXISTS idx_sensores_timestamp ON sensores(timestamp_coleta);
+CREATE INDEX IF NOT EXISTS idx_abrigos_estado ON abrigos(estado_id);
+
+-- =====================================================
+-- DADOS INICIAIS DOS ESTADOS
+-- =====================================================
+
+INSERT INTO estados (nome, sigla, latitude, longitude, populacao, fuso_horario, tipo_costa) VALUES
+('Rio de Janeiro', 'RJ', -22.9068, -43.1729, 17264943, 'UTC-3', 'atlantica'),
+('Santa Catarina', 'SC', -27.2423, -50.2189, 7164788, 'UTC-3', 'atlantica'), 
+('Ceará', 'CE', -3.7327, -38.5267, 9187103, 'UTC-3', 'atlantica'),
+('Pernambuco', 'PE', -8.0476, -34.8770, 9557071, 'UTC-3', 'atlantica'),
+('Alagoas', 'AL', -9.6498, -35.7089, 3337357, 'UTC-3', 'atlantica'),
+('Bahia', 'BA', -12.9714, -38.5014, 14873064, 'UTC-3', 'atlantica');
