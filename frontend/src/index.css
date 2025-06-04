@@ -1,0 +1,67 @@
+/* ===== SISTEMA DE DESIGN GSX ===== */
+
+/* Importação das fontes (backup caso o HTML falhe) */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* Variáveis de cor da identidade GSX */
+:root {
+  /* Cores Primárias GSX */
+  --color-deep-blue: #0A1628;
+  --color-electric-blue: #1E3A8A;
+  
+  /* Cores de Destaque */
+  --color-data-green: #10B981;
+  --color-innovation-purple: #6366F1;
+  
+  /* Cores Neutras */
+  --color-graphite: #1F2937;
+  --color-mid-gray: #6B7280;
+  --color-light-gray: #F3F4F6;
+  --color-tech-white: #FAFBFC;
+  
+  /* Fontes GSX */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Reset básico para todos os elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuração base do body */
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-graphite);
+  background-color: var(--color-tech-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Títulos usando Space Grotesk */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-deep-blue);
+  margin-bottom: 1rem;
+}
+
+/* Tamanhos específicos para títulos */
+h1 { font-size: 2.5rem; line-height: 1.2; }
+h2 { font-size: 2rem; line-height: 1.3; }
+h3 { font-size: 1.5rem; line-height: 1.4; }
+
+/* Links com cor GSX */
+a {
+  color: var(--color-electric-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-innovation-purple);
+}
