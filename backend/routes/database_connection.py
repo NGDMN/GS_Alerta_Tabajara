@@ -20,7 +20,7 @@ def conectar_db():
             print(f"Erro ao conectar: {e}")
     return conn, cursor 
     
-def fechar_db(conn):
+def desconectar_db(conn):
 
     if conn == None:
         print("Sem conexão ativa")
@@ -34,15 +34,15 @@ def fechar_db(conn):
 
 def testar_db():
     try:
-            conn = sqlite3.connect(database_url)
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM estados;")
-            resultados = cursor.fetchall()
-            print(f"Encontrados {len(resultados)} estados:")
-            for estado in resultados:
-                print(f"    • {estado[1]} ({estado[2]})")
-            cursor.close()
-            conn.close()
+        conn = sqlite3.connect(database_url)
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM estados;")
+        resultados = cursor.fetchall()
+        print(f"Encontrados {len(resultados)} estados:")
+        for estado in resultados:
+            print(f"    • {estado[1]} ({estado[2]})")
+        cursor.close()
+        conn.close()
     except Exception as e:
         print(f"Erro ao conectar: {e}")
     
