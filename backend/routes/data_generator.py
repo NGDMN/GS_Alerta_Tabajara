@@ -104,7 +104,7 @@ def calcular_temperatura_por_hora(temp_min, temp_max, hora):
 def buscar_dados_anteriores(estado_sigla):
     """Busca a última leitura de sensores para um estado específico."""
     try:
-        conexao, cursor = conectar_db()
+        conexao, cursor = conectar_db(silent=True)
         if not conexao:
             return None
         
@@ -118,7 +118,7 @@ def buscar_dados_anteriores(estado_sigla):
         """, (estado_sigla,))
         
         resultado = cursor.fetchone()
-        desconectar_db(conexao)
+        desconectar_db(conexao, silent=True)
         
         if resultado:
             return {
@@ -184,13 +184,21 @@ def gerar_dados_sensor_completo(estado_sigla, hora=12):
     temp_max = clima_base['temp_max'][indice]
     temperatura_final = calcular_temperatura_por_hora(temp_min, temp_max, hora)
     
+
+    # Converter base para escala diária
+    precipitacao_diaria_base = clima_base['precipitacao'][indice] / 30
+
+    # Variação proporcional à escala diária (±2mm é razoável)
+    precipitacao_final = precipitacao_diaria_base + random.uniform(-2, 2)
+
+    
     # Gerar outros dados com variação natural
     dados_base = {
         'temperatura': round(temperatura_final, 2),
         'umidade': round(clima_base['umidade_normal'][indice] + random.uniform(-5, 5), 2),
         'velocidade_vento': round(clima_base['velocidade_vento'][indice] + random.uniform(-2, 2), 2),
         'altura_ondas': round(clima_base['altura_ondas'][indice] + random.uniform(-0.3, 0.3), 2),
-        'precipitacao': round(max(0, clima_base['precipitacao'][indice] + random.uniform(-20, 20)), 2),
+        'precipitacao': round(max(0, precipitacao_final), 2),
         'nivel_mar': round(random.uniform(0, 0.5), 2),
         'magnitude_sismica': round(random.uniform(0, 2.5), 1),
         'pressao_atmosferica': round(random.uniform(1010, 1025), 1)
@@ -212,7 +220,7 @@ def gerar_dados_sensor_completo(estado_sigla, hora=12):
 def salvar_dados_no_banco(estado_sigla, dados_sensor):
     """Salva os dados do sensor no banco de dados."""
     try:
-        conexao, cursor = conectar_db()
+        conexao, cursor = conectar_db(silent=True)
         if not conexao:
             return False
         
@@ -240,7 +248,7 @@ def salvar_dados_no_banco(estado_sigla, dados_sensor):
         ))
         
         conexao.commit()
-        desconectar_db(conexao)
+        desconectar_db(conexao, silent=True)
         return True
         
     except Exception as e:
@@ -367,7 +375,7 @@ def salvar_dados_no_banco_com_timestamp(estado_sigla, dados_sensor, timestamp_pe
     Versão da função de salvamento que aceita timestamp personalizado.
     """
     try:
-        conexao, cursor = conectar_db()
+        conexao, cursor = conectar_db(silent=True)
         if not conexao:
             return False
         
@@ -399,7 +407,7 @@ def salvar_dados_no_banco_com_timestamp(estado_sigla, dados_sensor, timestamp_pe
         ))
         
         conexao.commit()
-        desconectar_db(conexao)
+        desconectar_db(conexao, silent=True)
         return True
         
     except Exception as e:
@@ -412,7 +420,7 @@ def verificar_dados_banco():
     Função para verificar quantos dados foram inseridos no banco.
     """
     try:
-        conexao, cursor = conectar_db()
+        conexao, cursor = conectar_db(silent=True)
         if not conexao:
             return
         
@@ -437,7 +445,7 @@ def verificar_dados_banco():
         """)
         periodo = cursor.fetchone()
         
-        desconectar_db(conexao)
+        desconectar_db(conexao, silent=True)
         
         print("📊 RELATÓRIO DO BANCO DE DADOS")
         print("=" * 40)
@@ -466,12 +474,12 @@ def verificar_dados_banco():
 
 def limpar_tabela_sensores(tabela):
     try:
-        conexao, cursor = conectar_db()
+        conexao, cursor = conectar_db(silent=True)
         if not conexao:
             return False
         cursor.execute(f"DELETE FROM {tabela};")
         conexao.commit()
-        desconectar_db(conexao)
+        desconectar_db(conexao, silent=True)
         return print(f"Tabela {tabela} limpa com sucesso!")
     except Exception as e:
         print(f"Falha ao conectar no DB: {e}")
