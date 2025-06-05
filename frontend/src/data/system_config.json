@@ -1,0 +1,18 @@
+{
+  "versao": "1.0.0",
+  "ultima_atualizacao": "2025-06-05 15:57:32",
+  "intervalo_atualizacao": 300,
+  "estados_monitorados": [
+    "RJ",
+    "SC",
+    "CE",
+    "PE",
+    "AL",
+    "BA"
+  ],
+  "tipos_emergencia": [
+    "incendio",
+    "enchente",
+    "tsunami"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "alertas": [],
+  "estatisticas": {
+    "total_estados": 6,
+    "estados_em_alerta": 0,
+    "estados_normais": 6,
+    "taxa_alerta": 0.0
+  },
+  "total_alertas": 0,
+  "alertas_criticos": 0,
+  "timestamp_ultima_atualizacao": "2025-06-05 15:57:32"
+}

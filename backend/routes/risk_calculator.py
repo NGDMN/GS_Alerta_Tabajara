@@ -530,24 +530,26 @@ def calcular_risco_geral(estado_sigla, verbose=False):
     
     # Determinar risco geral (maior nível entre todos)
     riscos = [risco_incendio['nivel'], risco_enchente['nivel'], risco_tsunami['nivel']]
-    
+
     # Prioridade: VERMELHO > LARANJA > AMARELO > VERDE
     ordem_prioridade = ['VERMELHO', 'LARANJA', 'AMARELO', 'VERDE']
-    
+
+    # PASSO 1: Determinar nível geral
     risco_geral = 'VERDE'
-    risco_dominante = None
-    
     for nivel in ordem_prioridade:
         if nivel in riscos:
             risco_geral = nivel
-            # Identificar qual tipo de risco está causando o alerta
-            if risco_incendio['nivel'] == nivel:
-                risco_dominante = 'incendio'
-            elif risco_enchente['nivel'] == nivel:
-                risco_dominante = 'enchente'  
-            elif risco_tsunami['nivel'] == nivel:
-                risco_dominante = 'tsunami'
             break
+
+    # PASSO 2: Determinar tipo dominante (SÓ se houver risco real)
+    risco_dominante = None
+    if risco_geral != 'VERDE':
+        if risco_incendio['nivel'] == risco_geral:
+            risco_dominante = 'incendio'
+        elif risco_enchente['nivel'] == risco_geral:
+            risco_dominante = 'enchente'
+        elif risco_tsunami['nivel'] == risco_geral:
+            risco_dominante = 'tsunami'
     
     return {
         'estado': estado_sigla,

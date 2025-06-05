@@ -1,0 +1,146 @@
+[
+  {
+    "sigla": "RJ",
+    "risco_geral": "VERDE",
+    "risco_dominante": null,
+    "timestamp": "2025-06-05 15:57:32",
+    "scores": {
+      "incendio": 0,
+      "enchente": 0,
+      "tsunami": 0
+    },
+    "niveis": {
+      "incendio": "VERDE",
+      "enchente": "VERDE",
+      "tsunami": "VERDE"
+    },
+    "cor_mapa": {
+      "hex": "#10B981",
+      "rgb": "rgb(16, 185, 129)",
+      "nome": "green",
+      "intensidade": 0.7
+    },
+    "prioridade_visual": 1,
+    "resumo_status": "Condições normais"
+  },
+  {
+    "sigla": "SC",
+    "risco_geral": "VERDE",
+    "risco_dominante": null,
+    "timestamp": "2025-06-05 15:57:32",
+    "scores": {
+      "incendio": 0,
+      "enchente": 0,
+      "tsunami": 0
+    },
+    "niveis": {
+      "incendio": "VERDE",
+      "enchente": "VERDE",
+      "tsunami": "VERDE"
+    },
+    "cor_mapa": {
+      "hex": "#10B981",
+      "rgb": "rgb(16, 185, 129)",
+      "nome": "green",
+      "intensidade": 0.7
+    },
+    "prioridade_visual": 1,
+    "resumo_status": "Condições normais"
+  },
+  {
+    "sigla": "CE",
+    "risco_geral": "VERDE",
+    "risco_dominante": null,
+    "timestamp": "2025-06-05 15:57:32",
+    "scores": {
+      "incendio": 0,
+      "enchente": 0,
+      "tsunami": 0
+    },
+    "niveis": {
+      "incendio": "VERDE",
+      "enchente": "VERDE",
+      "tsunami": "VERDE"
+    },
+    "cor_mapa": {
+      "hex": "#10B981",
+      "rgb": "rgb(16, 185, 129)",
+      "nome": "green",
+      "intensidade": 0.7
+    },
+    "prioridade_visual": 1,
+    "resumo_status": "Condições normais"
+  },
+  {
+    "sigla": "PE",
+    "risco_geral": "AMARELO",
+    "risco_dominante": "enchente",
+    "timestamp": "2025-06-05 15:57:32",
+    "scores": {
+      "incendio": 0,
+      "enchente": 27,
+      "tsunami": 0
+    },
+    "niveis": {
+      "incendio": "VERDE",
+      "enchente": "AMARELO",
+      "tsunami": "VERDE"
+    },
+    "cor_mapa": {
+      "hex": "#F59E0B",
+      "rgb": "rgb(245, 158, 11)",
+      "nome": "yellow",
+      "intensidade": 0.8
+    },
+    "prioridade_visual": 2,
+    "resumo_status": "Atenção para enchente"
+  },
+  {
+    "sigla": "AL",
+    "risco_geral": "VERDE",
+    "risco_dominante": null,
+    "timestamp": "2025-06-05 15:57:32",
+    "scores": {
+      "incendio": 0,
+      "enchente": 0,
+      "tsunami": 0
+    },
+    "niveis": {
+      "incendio": "VERDE",
+      "enchente": "VERDE",
+      "tsunami": "VERDE"
+    },
+    "cor_mapa": {
+      "hex": "#10B981",
+      "rgb": "rgb(16, 185, 129)",
+      "nome": "green",
+      "intensidade": 0.7
+    },
+    "prioridade_visual": 1,
+    "resumo_status": "Condições normais"
+  },
+  {
+    "sigla": "BA",
+    "risco_geral": "VERDE",
+    "risco_dominante": null,
+    "timestamp": "2025-06-05 15:57:32",
+    "scores": {
+      "incendio": 0,
+      "enchente": 0,
+      "tsunami": 0
+    },
+    "niveis": {
+      "incendio": "VERDE",
+      "enchente": "VERDE",
+      "tsunami": "VERDE"
+    },
+    "cor_mapa": {
+      "hex": "#10B981",
+      "rgb": "rgb(16, 185, 129)",
+      "nome": "green",
+      "intensidade": 0.7
+    },
+    "prioridade_visual": 1,
+    "resumo_status": "Condições normais"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "resumo_geral": {
+    "total_estados": 6,
+    "estados_normais": 5,
+    "estados_alerta": 1,
+    "taxa_alerta": 16.7
+  },
+  "distribuicao_niveis": {
+    "VERDE": 5,
+    "AMARELO": 1,
+    "LARANJA": 0,
+    "VERMELHO": 0
+  },
+  "distribuicao_tipos": {
+    "incendio": 0,
+    "enchente": 1,
+    "tsunami": 0
+  },
+  "alertas_ativos": 0,
+  "timestamp": "2025-06-05 15:57:32",
+  "status_sistema": "OPERACIONAL"
+}
