@@ -2,6 +2,7 @@ import random
 from datetime import datetime, timedelta
 import math
 from database_connection import conectar_db, desconectar_db
+import time
 
 # Dados climáticos por estação para cada estado
 DADOS_ESTADOS = {
@@ -256,15 +257,17 @@ def salvar_dados_no_banco(estado_sigla, dados_sensor):
         # Inserir dados na tabela sensores
         cursor.execute("""
             INSERT INTO sensores (
-                estado_id, temperatura, umidade, precipitacao, 
+                estado_id, latitude, longitude, temperatura, umidade, precipitacao, 
                 velocidade_vento, nivel_mar, altura_ondas, 
                 magnitude_sismica, pressao_atmosferica
             ) VALUES (
-                (SELECT id FROM estados WHERE sigla = ?), 
+                (SELECT id FROM estados WHERE sigla = ?),
+                (SELECT latitude FROM estados WHERE sigla = ?),
+                (SELECT longitude FROM estados WHERE sigla = ?),
                 ?, ?, ?, ?, ?, ?, ?, ?
             )
         """, (
-            estado_sigla,
+            estado_sigla, estado_sigla, estado_sigla,  # 3x estado_sigla para os SELECTs
             dados_sensor['temperatura'],
             dados_sensor['umidade'], 
             dados_sensor['precipitacao'],
@@ -313,6 +316,7 @@ def gerar_historico_7_dias():
             # Loop pelos estados
             for estado in estados:
                 try:
+                    time.sleep(0.1)
                     # Gerar dados do sensor
                     dados = gerar_dados_sensor_completo(estado, hora)
                     
