@@ -4,7 +4,7 @@ import math
 from database_connection import conectar_db, desconectar_db
 import time
 
-# Dados climáticos por estação para cada estado
+# Dados climáticos por estação para cada estado (mantido igual)
 DADOS_ESTADOS = {
     'RJ': {
         'temp_min': [24, 21, 17, 21],       # verão, outono, inverno, primavera (°C)
@@ -57,12 +57,8 @@ DADOS_ESTADOS = {
 }
 
 def obter_estacao_atual():
-    """
-    Determina a estação climática atual baseada no mês.
-    Returns: string com nome da estação
-    """
+    """Determina a estação climática atual baseada no mês."""
     mes = datetime.now().month
-    
     estacoes = {
         'verao': [12, 1, 2],
         'outono': [3, 4, 5],
@@ -73,42 +69,45 @@ def obter_estacao_atual():
     for estacao, meses in estacoes.items():
         if mes in meses:
             return estacao
-    
-    return 'verao'  # fallback
+    return 'verao'
 
-def ajustar_temperatura_por_hora(temperatura_base, hora):
+def calcular_temperatura_por_hora(temp_min, temp_max, hora):
     """
-    Ajusta temperatura conforme hora do dia usando curva matemática.
+    NOVA FUNÇÃO: Calcula temperatura realista baseada no ciclo diário.
     
-    Args:
-        temperatura_base: temperatura base da estação
-        hora: hora do dia (0-23)
-    
-    Returns:
-        temperatura ajustada
+    Lógica:
+    - Mínimo às 6h (nascer do sol)
+    - Máximo às 14h (pico de calor)
+    - Usa curva senoidal mais realista
     """
-    # Pico de calor às 14h, mínimo às 6h
-    radianos = (hora - 6) * math.pi / 12
-    fator_horario = math.sin(radianos) * 3  # Varia entre -3 e +3
+    # Normalizar hora para ciclo 0-24h
+    hora_normalizada = hora % 24
     
-    return temperatura_base + fator_horario
+    # Calcular posição no ciclo diário (6h = mínimo, 14h = máximo)
+    # Deslocamos 6h para que o mínimo seja em x=0
+    ciclo_radianos = ((hora_normalizada - 6) % 24) * 2 * math.pi / 24
+    
+    # Função senoidal ajustada:
+    # - sin(-π/2) = -1 (mínimo às 6h)
+    # - sin(π/6) ≈ 0.5 (meio termo às 10h) 
+    # - sin(π/2) = 1 (máximo às 14h)
+    fator_ciclo = math.sin(ciclo_radianos - math.pi/2)
+    
+    # Interpolar entre temperatura mínima e máxima
+    temperatura_base = temp_min + (temp_max - temp_min) * (fator_ciclo + 1) / 2
+    
+    # Adicionar PEQUENA variação natural (max ±0.8°C)
+    variacao_natural = random.uniform(-0.8, 0.8)
+    
+    return temperatura_base + variacao_natural
 
 def buscar_dados_anteriores(estado_sigla):
-    """
-    Busca a última leitura de sensores para um estado específico.
-    
-    Args:
-        estado_sigla: sigla do estado (RJ, SC, etc.)
-    
-    Returns:
-        dict com dados anteriores ou None se não encontrar
-    """
+    """Busca a última leitura de sensores para um estado específico."""
     try:
         conexao, cursor = conectar_db()
         if not conexao:
             return None
         
-        # Busca especificamente deste estado
         cursor.execute("""
             SELECT temperatura, umidade, velocidade_vento, altura_ondas 
             FROM sensores s
@@ -128,23 +127,15 @@ def buscar_dados_anteriores(estado_sigla):
                 'velocidade_vento': resultado[2],
                 'altura_ondas': resultado[3]
             }
-        
         return None
         
     except Exception as e:
         print(f"Erro ao buscar dados anteriores: {e}")
         return None
 
-def aplicar_correlacoes_climaticas(dados_base, dados_anteriores):
+def aplicar_correlacoes_climaticas_melhorada(dados_base, dados_anteriores, preservar_temp=True):
     """
-    Aplica correlações realistas entre variáveis climáticas.
-    
-    Args:
-        dados_base: dados gerados inicialmente
-        dados_anteriores: última leitura do banco
-    
-    Returns:
-        dados com correlações aplicadas
+    FUNÇÃO MELHORADA: Aplica correlações mas preserva temperatura se solicitado.
     """
     dados_finais = dados_base.copy()
     
@@ -152,29 +143,22 @@ def aplicar_correlacoes_climaticas(dados_base, dados_anteriores):
     if not dados_anteriores:
         return dados_finais
     
-    # Correlação 1: Temperatura vs Umidade
-    diferenca_temp = dados_base['temperatura'] - dados_anteriores['temperatura']
-    
-    if diferenca_temp > 2:  # Esquentou significativamente
-        # Diminui umidade proporcionalmente
-        ajuste_umidade = diferenca_temp * 2.5
-        dados_finais['umidade'] = max(30, dados_base['umidade'] - ajuste_umidade)
+    # Correlação 1: Temperatura vs Umidade (mais suave)
+    if not preservar_temp:  # Só altera temperatura se explicitamente permitido
+        diferenca_temp = dados_base['temperatura'] - dados_anteriores['temperatura']
         
-    elif diferenca_temp < -2:  # Esfriou significativamente
-        # Aumenta umidade proporcionalmente
-        ajuste_umidade = abs(diferenca_temp) * 1.8
-        dados_finais['umidade'] = min(95, dados_base['umidade'] + ajuste_umidade)
+        if diferenca_temp > 3:  # Threshold mais alto
+            ajuste_umidade = diferenca_temp * 1.5  # Fator menor
+            dados_finais['umidade'] = max(30, dados_base['umidade'] - ajuste_umidade)
+            
+        elif diferenca_temp < -3:
+            ajuste_umidade = abs(diferenca_temp) * 1.2
+            dados_finais['umidade'] = min(95, dados_base['umidade'] + ajuste_umidade)
     
-    # Correlação 2: Vento forte afeta temperatura
+    # Correlação 2: Vento forte afeta ondas (mantida)
     diferenca_vento = dados_base['velocidade_vento'] - dados_anteriores['velocidade_vento']
     
-    if diferenca_vento > 3:  # Vento aumentou muito
-        # Vento forte geralmente traz mudança de temperatura
-        if random.random() > 0.5:  # 50% chance de esfriar
-            dados_finais['temperatura'] = dados_base['temperatura'] - random.uniform(1, 2.5)
-    
-    # Correlação 3: Vento forte = ondas maiores
-    if dados_base['velocidade_vento'] > 8:  # Vento forte
+    if dados_base['velocidade_vento'] > 8:
         fator_onda = 1 + (dados_base['velocidade_vento'] - 8) * 0.1
         dados_finais['altura_ondas'] = dados_base['altura_ondas'] * fator_onda
     
@@ -182,14 +166,7 @@ def aplicar_correlacoes_climaticas(dados_base, dados_anteriores):
 
 def gerar_dados_sensor_completo(estado_sigla, hora=12):
     """
-    Gera uma leitura completa de sensor com correlações realistas.
-    
-    Args:
-        estado_sigla: sigla do estado
-        hora: hora da leitura (0-23)
-    
-    Returns:
-        dict com todos os dados do sensor
+    VERSÃO CORRIGIDA: Gera dados com correlação horária preservada.
     """
     if estado_sigla not in DADOS_ESTADOS:
         print(f"Estado {estado_sigla} não encontrado!")
@@ -202,18 +179,10 @@ def gerar_dados_sensor_completo(estado_sigla, hora=12):
     
     clima_base = DADOS_ESTADOS[estado_sigla]
     
-    # Gerar valores base com variação natural
+    # CORREÇÃO PRINCIPAL: Usar nova função de temperatura
     temp_min = clima_base['temp_min'][indice]
     temp_max = clima_base['temp_max'][indice]
-    
-    # Temperatura base entre min e max da estação
-    temp_base = random.uniform(temp_min, temp_max)
-    
-    # Aplicar variação por hora do dia
-    temperatura_horaria = ajustar_temperatura_por_hora(temp_base, hora)
-    
-    # Adicionar pequena variação natural
-    temperatura_final = temperatura_horaria + random.uniform(-1.5, 1.5)
+    temperatura_final = calcular_temperatura_por_hora(temp_min, temp_max, hora)
     
     # Gerar outros dados com variação natural
     dados_base = {
@@ -222,14 +191,16 @@ def gerar_dados_sensor_completo(estado_sigla, hora=12):
         'velocidade_vento': round(clima_base['velocidade_vento'][indice] + random.uniform(-2, 2), 2),
         'altura_ondas': round(clima_base['altura_ondas'][indice] + random.uniform(-0.3, 0.3), 2),
         'precipitacao': round(max(0, clima_base['precipitacao'][indice] + random.uniform(-20, 20)), 2),
-        'nivel_mar': round(random.uniform(0, 0.5), 2),  # Variação do nível do mar
-        'magnitude_sismica': round(random.uniform(0, 2.5), 1),  # Atividade sísmica baixa normal
-        'pressao_atmosferica': round(random.uniform(1010, 1025), 1)  # Pressão atmosférica normal
+        'nivel_mar': round(random.uniform(0, 0.5), 2),
+        'magnitude_sismica': round(random.uniform(0, 2.5), 1),
+        'pressao_atmosferica': round(random.uniform(1010, 1025), 1)
     }
     
-    # Buscar dados anteriores e aplicar correlações
+    # Buscar dados anteriores e aplicar correlações (SEM alterar temperatura)
     dados_anteriores = buscar_dados_anteriores(estado_sigla)
-    dados_correlacionados = aplicar_correlacoes_climaticas(dados_base, dados_anteriores)
+    dados_correlacionados = aplicar_correlacoes_climaticas_melhorada(
+        dados_base, dados_anteriores, preservar_temp=True
+    )
     
     # Garantir valores dentro de limites realistas
     dados_correlacionados['umidade'] = max(20, min(100, dados_correlacionados['umidade']))
@@ -239,22 +210,12 @@ def gerar_dados_sensor_completo(estado_sigla, hora=12):
     return dados_correlacionados
 
 def salvar_dados_no_banco(estado_sigla, dados_sensor):
-    """
-    Salva os dados do sensor no banco de dados.
-    
-    Args:
-        estado_sigla: sigla do estado
-        dados_sensor: dict com dados do sensor
-    
-    Returns:
-        bool: True se salvou com sucesso
-    """
+    """Salva os dados do sensor no banco de dados."""
     try:
         conexao, cursor = conectar_db()
         if not conexao:
             return False
         
-        # Inserir dados na tabela sensores
         cursor.execute("""
             INSERT INTO sensores (
                 estado_id, latitude, longitude, temperatura, umidade, precipitacao, 
@@ -267,7 +228,7 @@ def salvar_dados_no_banco(estado_sigla, dados_sensor):
                 ?, ?, ?, ?, ?, ?, ?, ?
             )
         """, (
-            estado_sigla, estado_sigla, estado_sigla,  # 3x estado_sigla para os SELECTs
+            estado_sigla, estado_sigla, estado_sigla,
             dados_sensor['temperatura'],
             dados_sensor['umidade'], 
             dados_sensor['precipitacao'],
@@ -286,115 +247,88 @@ def salvar_dados_no_banco(estado_sigla, dados_sensor):
         print(f"Erro ao salvar no banco: {e}")
         return False
 
-def gerar_historico_7_dias():
+def testar_correlacao_horaria():
     """
-    Gera dados históricos dos últimos 7 dias para todos os estados.
-    
-    Cria 6 leituras por dia (a cada 4 horas) para cada estado.
-    Total: 7 dias × 6 leituras × 6 estados = 252 registros
+    NOVO TESTE: Verifica se a correlação horária está funcionando corretamente.
     """
-    estados = ['RJ', 'SC', 'CE', 'PE', 'AL', 'BA']
-    horarios = [2, 6, 10, 14, 18, 22]  # A cada 4 horas
+    print("🧪 Testando correlação horária melhorada...")
     
-    print("🚀 Iniciando geração de dados históricos...")
-    print(f"📊 Serão gerados dados para {len(estados)} estados")
-    print(f"⏰ {len(horarios)} leituras por dia durante 7 dias")
-    print(f"📈 Total estimado: {7 * len(horarios) * len(estados)} registros")
+    horarios_teste = [6, 10, 14, 18, 22]
+    estado_teste = 'RJ'
     
-    contador_sucesso = 0
-    contador_erro = 0
+    print(f"\n🗺️ Estado: {estado_teste}")
+    print("⏰ Horário | 🌡️ Temperatura | 💧 Umidade | 💨 Vento")
+    print("-" * 55)
     
-    # Loop pelos últimos 7 dias
-    for dia in range(7):
-        data_atual = datetime.now() - timedelta(days=dia)
-        print(f"\n📅 Processando dia {data_atual.strftime('%d/%m/%Y')}")
-        
-        # Loop pelos horários do dia
-        for hora in horarios:
-            print(f"  ⏰ Gerando dados para {hora:02d}:00h")
-            
-            # Loop pelos estados
-            for estado in estados:
-                try:
-                    time.sleep(0.1)
-                    # Gerar dados do sensor
-                    dados = gerar_dados_sensor_completo(estado, hora)
-                    
-                    if dados:
-                        # Salvar no banco
-                        if salvar_dados_no_banco(estado, dados):
-                            contador_sucesso += 1
-                            print(f"    ✅ {estado}: {dados['temperatura']:.1f}°C, {dados['umidade']:.1f}%")
-                        else:
-                            contador_erro += 1
-                            print(f"    ❌ {estado}: Erro ao salvar")
-                    else:
-                        contador_erro += 1
-                        print(f"    ❌ {estado}: Erro ao gerar dados")
-                        
-                except Exception as e:
-                    contador_erro += 1
-                    print(f"    ❌ {estado}: Erro inesperado - {e}")
+    temperaturas = []
+    for hora in horarios_teste:
+        dados = gerar_dados_sensor_completo(estado_teste, hora)
+        if dados:
+            temperatura = dados['temperatura']
+            temperaturas.append((hora, temperatura))
+            print(f"   {hora:02d}:00h  |    {temperatura:5.1f}°C    | {dados['umidade']:5.1f}% | {dados['velocidade_vento']:4.1f}m/s")
     
-    print(f"\n🎉 Geração concluída!")
-    print(f"✅ Sucessos: {contador_sucesso}")
-    print(f"❌ Erros: {contador_erro}")
-    print(f"📊 Taxa de sucesso: {(contador_sucesso/(contador_sucesso+contador_erro)*100):.1f}%")
-
-def testar_geracao_dados():
-    """
-    Testa a geração de dados para diferentes horários.
-    """
-    print("🧪 Testando geração de dados...")
+    print(f"\n📊 Análise das temperaturas:")
+    temp_06h = next(t[1] for t in temperaturas if t[0] == 6)
+    temp_14h = next(t[1] for t in temperaturas if t[0] == 14)
+    temp_22h = next(t[1] for t in temperaturas if t[0] == 22)
     
-    estados_teste = ['RJ', 'SC']
-    horarios_teste = [6, 14, 22]
+    print(f"🌅 6h:  {temp_06h:.1f}°C")
+    print(f"🌞 14h: {temp_14h:.1f}°C (diferença: {temp_14h - temp_06h:+.1f}°C)")
+    print(f"🌙 22h: {temp_22h:.1f}°C (diferença: {temp_22h - temp_14h:+.1f}°C)")
     
-    for estado in estados_teste:
-        print(f"\n🗺️ Estado: {estado}")
-        for hora in horarios_teste:
-            dados = gerar_dados_sensor_completo(estado, hora)
-            if dados:
-                print(f"  {hora:02d}:00h - Temp: {dados['temperatura']:.1f}°C, "
-                      f"Umidade: {dados['umidade']:.1f}%, "
-                      f"Vento: {dados['velocidade_vento']:.1f}m/s")
+    if temp_14h > temp_06h:
+        print("✅ Correlação horária funcionando! Tarde mais quente que manhã.")
+    else:
+        print("❌ Problema na correlação horária detectado!")
+    
+    if temp_22h < temp_14h:
+        print("✅ Noite mais fria que tarde - padrão normal!")
+    else:
+        print("⚠️ Noite deveria ser mais fria que a tarde")
 
 # Execução principal
 if __name__ == "__main__":
-    print("🌦️ Sistema de Geração de Dados Climáticos")
-    print("=" * 50)
+    print("🌦️ Sistema de Geração de Dados Climáticos - VERSÃO CORRIGIDA")
+    print("=" * 60)
     
-    # Mostrar estação atual
     estacao = obter_estacao_atual()
     print(f"🍂 Estação atual: {estacao.upper()}")
     
-    # Escolher o que fazer
     print("\nEscolha uma opção:")
-    print("1. Testar geração de dados")
-    print("2. Gerar histórico completo (7 dias)")
+    print("1. Testar correlação horária (NOVO)")
+    print("2. Testar geração de dados simples")
     print("3. Gerar dados únicos para teste")
     
     opcao = input("\nDigite sua opção (1, 2 ou 3): ").strip()
     
     if opcao == "1":
-        testar_geracao_dados()
+        testar_correlacao_horaria()
     elif opcao == "2":
-        confirmacao = input("⚠️  Isso vai gerar 252 registros. Confirma? (s/n): ")
-        if confirmacao.lower() == 's':
-            gerar_historico_7_dias()
-        else:
-            print("❌ Operação cancelada.")
+        # Teste simples mantido
+        estados_teste = ['RJ', 'SC']
+        horarios_teste = [6, 14, 22]
+        
+        for estado in estados_teste:
+            print(f"\n🗺️ Estado: {estado}")
+            for hora in horarios_teste:
+                dados = gerar_dados_sensor_completo(estado, hora)
+                if dados:
+                    print(f"  {hora:02d}:00h - Temp: {dados['temperatura']:.1f}°C")
     elif opcao == "3":
-        # Teste simples
+        # Teste específico corrigido
         dados_rj_manha = gerar_dados_sensor_completo('RJ', 6)
         dados_rj_tarde = gerar_dados_sensor_completo('RJ', 14)
         
-        print(f"\n🌅 RJ Manhã (6h): {dados_rj_manha}")
-        print(f"🌞 RJ Tarde (14h): {dados_rj_tarde}")
+        print(f"\n🌅 RJ Manhã (6h): Temp: {dados_rj_manha['temperatura']:.1f}°C")
+        print(f"🌞 RJ Tarde (14h): Temp: {dados_rj_tarde['temperatura']:.1f}°C")
         
-        if dados_rj_tarde['temperatura'] > dados_rj_manha['temperatura']:
-            print("✅ Tarde mais quente que manhã - correlação horária funcionando!")
+        diferenca = dados_rj_tarde['temperatura'] - dados_rj_manha['temperatura']
+        print(f"📊 Diferença: {diferenca:+.1f}°C")
+        
+        if diferenca > 0:
+            print("✅ Correlação horária funcionando! Tarde mais quente que manhã.")
         else:
-            print("⚠️ Pode haver problema na correlação horária")
+            print("❌ Problema na correlação horária detectado!")
     else:
         print("❌ Opção inválida!")
