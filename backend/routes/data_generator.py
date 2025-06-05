@@ -522,10 +522,9 @@ if __name__ == "__main__":
         else:
             print("❌ Problema na correlação horária detectado!")
     elif opcao == "4":
-        gera_dados_7_dias = popular_banco_7_dias()
-        verifica_dados = verificar_dados_banco()
+        popular_banco_7_dias()
+        verificar_dados_banco()
     elif opcao == "5":
-
         print("\nEscolha uma opção:")
         print("1. Estados")
         print("2. Sensores")
