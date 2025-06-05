@@ -287,6 +287,195 @@ def testar_correlacao_horaria():
     else:
         print("⚠️ Noite deveria ser mais fria que a tarde")
 
+
+def popular_banco_7_dias():
+    """
+    Popula o banco com dados dos últimos 7 dias.
+    7 dias × 6 estados × 6 horários = 252 registros
+    """
+    print("🗃️ Iniciando populamento do banco - Últimos 7 dias")
+    print("=" * 50)
+    
+    # Configurações
+    estados = ['RJ', 'SC', 'CE', 'PE', 'AL', 'BA']
+    horarios = [2, 6, 10, 14, 18, 22]  # De 4 em 4 horas
+    
+    # Datas dos últimos 7 dias
+    data_hoje = datetime.now()
+    datas = []
+    for i in range(7):
+        data = data_hoje - timedelta(days=i)
+        datas.append(data)
+    
+    contador_sucessos = 0
+    contador_falhas = 0
+    
+    print(f"📅 Gerando dados de {datas[-1].strftime('%d/%m/%Y')} até {datas[0].strftime('%d/%m/%Y')}")
+    print(f"🗺️ Estados: {', '.join(estados)}")
+    print(f"⏰ Horários: {', '.join([f'{h:02d}:00' for h in horarios])}")
+    print(f"📊 Total esperado: {len(datas)} dias × {len(estados)} estados × {len(horarios)} horários = {len(datas) * len(estados) * len(horarios)} registros")
+    print()
+    
+    # Loop principal - pelos dias (do mais antigo para o mais recente)
+    for i, data in enumerate(reversed(datas), 1):
+        print(f"📅 Processando dia {i}/7: {data.strftime('%d/%m/%Y (%A)')}")
+        
+        # Loop pelos horários do dia
+        for hora in horarios:
+            print(f"  ⏰ Horário {hora:02d}:00h", end=" - ")
+            
+            # Loop pelos estados
+            sucessos_horario = 0
+            for estado in estados:
+                # Gerar dados para este estado/horário
+                dados = gerar_dados_sensor_completo(estado, hora)
+                
+                if dados:
+                    # Simular timestamp específico para este dia/hora
+                    timestamp_especifico = data.replace(hour=hora, minute=0, second=0, microsecond=0)
+                    
+                    # Salvar no banco (precisamos ajustar a função para aceitar timestamp customizado)
+                    if salvar_dados_no_banco_com_timestamp(estado, dados, timestamp_especifico):
+                        contador_sucessos += 1
+                        sucessos_horario += 1
+                    else:
+                        contador_falhas += 1
+                else:
+                    contador_falhas += 1
+            
+            print(f"{sucessos_horario}/{len(estados)} estados salvos")
+        
+        print(f"  ✅ Dia {i} concluído")
+        print()
+    
+    # Relatório final
+    print("🎯 RELATÓRIO FINAL")
+    print("=" * 30)
+    print(f"✅ Sucessos: {contador_sucessos}")
+    print(f"❌ Falhas: {contador_falhas}")
+    print(f"📊 Taxa de sucesso: {(contador_sucessos/(contador_sucessos+contador_falhas)*100):.1f}%")
+    
+    if contador_sucessos > 0:
+        print("\n🎉 Banco populado com sucesso!")
+        print(f"💾 {contador_sucessos} registros inseridos no banco de dados")
+    else:
+        print("\n⚠️ Nenhum registro foi inserido. Verifique a conexão com o banco.")
+
+
+def salvar_dados_no_banco_com_timestamp(estado_sigla, dados_sensor, timestamp_personalizado):
+    """
+    Versão da função de salvamento que aceita timestamp personalizado.
+    """
+    try:
+        conexao, cursor = conectar_db()
+        if not conexao:
+            return False
+        
+        # Converter datetime para string no formato SQLite
+        timestamp_str = timestamp_personalizado.strftime('%Y-%m-%d %H:%M:%S')
+        
+        cursor.execute("""
+            INSERT INTO sensores (
+                estado_id, latitude, longitude, temperatura, umidade, precipitacao, 
+                velocidade_vento, nivel_mar, altura_ondas, 
+                magnitude_sismica, pressao_atmosferica, timestamp_coleta
+            ) VALUES (
+                (SELECT id FROM estados WHERE sigla = ?),
+                (SELECT latitude FROM estados WHERE sigla = ?),
+                (SELECT longitude FROM estados WHERE sigla = ?),
+                ?, ?, ?, ?, ?, ?, ?, ?, ?
+            )
+        """, (
+            estado_sigla, estado_sigla, estado_sigla,
+            dados_sensor['temperatura'],
+            dados_sensor['umidade'], 
+            dados_sensor['precipitacao'],
+            dados_sensor['velocidade_vento'],
+            dados_sensor['nivel_mar'],
+            dados_sensor['altura_ondas'],
+            dados_sensor['magnitude_sismica'],
+            dados_sensor['pressao_atmosferica'],
+            timestamp_str
+        ))
+        
+        conexao.commit()
+        desconectar_db(conexao)
+        return True
+        
+    except Exception as e:
+        print(f"Erro ao salvar no banco: {e}")
+        return False
+
+
+def verificar_dados_banco():
+    """
+    Função para verificar quantos dados foram inseridos no banco.
+    """
+    try:
+        conexao, cursor = conectar_db()
+        if not conexao:
+            return
+        
+        # Contar total de registros
+        cursor.execute("SELECT COUNT(*) FROM sensores")
+        total = cursor.fetchone()[0]
+        
+        # Contar por estado
+        cursor.execute("""
+            SELECT e.sigla, COUNT(s.id) 
+            FROM estados e 
+            LEFT JOIN sensores s ON e.id = s.estado_id 
+            GROUP BY e.sigla 
+            ORDER BY e.sigla
+        """)
+        por_estado = cursor.fetchall()
+        
+        # Período dos dados
+        cursor.execute("""
+            SELECT MIN(timestamp_coleta), MAX(timestamp_coleta) 
+            FROM sensores
+        """)
+        periodo = cursor.fetchone()
+        
+        desconectar_db(conexao)
+        
+        print("📊 RELATÓRIO DO BANCO DE DADOS")
+        print("=" * 40)
+        print(f"💾 Total de registros: {total}")
+        
+        if periodo[0] and periodo[1]:
+            print(f"📅 Período: {periodo[0]} até {periodo[1]}")
+        
+        print("\n🗺️ Registros por estado:")
+        for sigla, count in por_estado:
+            print(f"  {sigla}: {count} registros")
+        
+        # Verificação esperada
+        esperado = 7 * 6 * 6  # 7 dias, 6 estados, 6 horários
+        print(f"\n🎯 Esperado: {esperado} registros")
+        
+        if total == esperado:
+            print("✅ Banco populado corretamente!")
+        elif total > 0:
+            print(f"⚠️ Banco parcialmente populado ({(total/esperado)*100:.1f}%)")
+        else:
+            print("❌ Banco vazio")
+            
+    except Exception as e:
+        print(f"Erro ao verificar banco: {e}")        
+
+def limpar_tabela_sensores(tabela):
+    try:
+        conexao, cursor = conectar_db()
+        if not conexao:
+            return False
+        cursor.execute(f"DELETE FROM {tabela};")
+        conexao.commit()
+        desconectar_db(conexao)
+        return print(f"Tabela {tabela} limpa com sucesso!")
+    except Exception as e:
+        print(f"Falha ao conectar no DB: {e}")
+
 # Execução principal
 if __name__ == "__main__":
     print("🌦️ Sistema de Geração de Dados Climáticos - VERSÃO CORRIGIDA")
@@ -296,11 +485,13 @@ if __name__ == "__main__":
     print(f"🍂 Estação atual: {estacao.upper()}")
     
     print("\nEscolha uma opção:")
-    print("1. Testar correlação horária (NOVO)")
+    print("1. Testar correlação horária")
     print("2. Testar geração de dados simples")
     print("3. Gerar dados únicos para teste")
-    
-    opcao = input("\nDigite sua opção (1, 2 ou 3): ").strip()
+    print("4. Gera dados para 7 dias e insere no DB")
+    print("5. Limpar tabela sensores")
+
+    opcao = input("\nDigite sua opção (1, 2, 3, 4 ou 5): ").strip()
     
     if opcao == "1":
         testar_correlacao_horaria()
@@ -330,5 +521,25 @@ if __name__ == "__main__":
             print("✅ Correlação horária funcionando! Tarde mais quente que manhã.")
         else:
             print("❌ Problema na correlação horária detectado!")
+    elif opcao == "4":
+        gera_dados_7_dias = popular_banco_7_dias()
+        verifica_dados = verificar_dados_banco()
+    elif opcao == "5":
+
+        print("\nEscolha uma opção:")
+        print("1. Estados")
+        print("2. Sensores")
+        print("3. Abrigos")
+
+        opcoes = input("\nDigite sua opção (1, 2, 3): ").strip()
+
+        tabela = {
+            '1': "estados",
+            '2': "sensores",
+            '3': "abrigos" 
+            }
+        
+        limpar = limpar_tabela_sensores(tabela[opcoes])
+
     else:
         print("❌ Opção inválida!")
