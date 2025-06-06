@@ -147,7 +147,7 @@
   /* TEXTO: Pequeno e discreto */
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: var(--color-tech-white);
+  color: var(--color-tech-white) !important;
   font-weight: 500;
 }
 

@@ -1,357 +1,346 @@
-// src/pages/Sobre.jsx
-import React from 'react';
-import './Sobre.css';
+// src/pages/Home.jsx - VERSÃO FINAL COM VÍDEO
+import React, { useState, useEffect } from 'react';
+import './Home.css';
 
-function Sobre() {
+function Home() {
+  // ===== ESTADOS: Controle de interações =====
+  const [videoTocando, setVideoTocando] = useState(false);
+  const [estatisticasCarregadas, setEstatisticasCarregadas] = useState(false);
+
+  // ===== EFFECT: Animação de entrada das estatísticas =====
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setEstatisticasCarregadas(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // ===== FUNÇÃO: Simular reprodução de vídeo =====
+  const handleVideoPlay = () => {
+    if (!videoTocando) {
+      setVideoTocando(true);
+      // Simula vídeo de 3 minutos
+      setTimeout(() => {
+        alert('🎬 Vídeo "GSX Alerta Tabajara - Como Não Morrer em 2025" concluído!\n\n' +
+              '⏱️ Duração: 3 minutos\n' +
+              '🎯 Conteúdo: Apresentação institucional do sistema\n' +
+              '📊 Demonstração das funcionalidades principais\n\n' +
+              '🔄 Em breve, vídeo real será inserido aqui!');
+        setVideoTocando(false);
+      }, 3000); // 3 segundos simulando 3 minutos
+    }
+  };
+
   return (
-    <div className="sobre page-enter">
+    <div className="home page-enter">
       <div className="page-container">
         
-        {/* HEADER DA PÁGINA */}
-        <section className="page-header">
-          <h1>Sobre o Projeto</h1>
-          <p>Sistema Integrado de Alertas de Emergência para Estados Costeiros Brasileiros</p>
+        {/* === SEÇÃO HERO COM VÍDEO === */}
+        <section className="hero-section">
+          <div className="hero-content">
+            <div className="hero-text">
+              <h1>🚨 GSX Alerta Tabajara</h1>
+              <h2>Sistema de Emergência Climatológica</h2>
+              <p className="hero-description">
+                Monitoramento em tempo real dos <strong>estados costeiros brasileiros </strong> 
+                para detecção automática de emergências climáticas com alertas instantâneos 
+                e orientações da Defesa Civil.
+              </p>
+              
+              <div className="hero-features">
+                <div className="feature-item">
+                  <span className="feature-icon">🌊</span>
+                  <span>Tsunamis & Enchentes</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">🔥</span>
+                  <span>Incêndios Florestais</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">⚡</span>
+                  <span>Alertas Automáticos</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">🏥</span>
+                  <span>Rotas para Abrigos</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* === PLAYER DE VÍDEO === */}
+            <div className="video-container">
+              <div className={`video-player ${videoTocando ? 'playing' : ''}`}>
+                {!videoTocando ? (
+                  <div className="video-placeholder" onClick={handleVideoPlay}>
+                    <div className="video-overlay">
+                      <div className="play-button">
+                        <span className="play-icon">▶️</span>
+                      </div>
+                      <div className="video-info">
+                        <h3>🎬 Apresentação Institucional</h3>
+                        <p>Como o Sistema GSX Tabajara Salva Vidas</p>
+                        <small>⏱️ Duração: 3 minutos | 🎯 Demonstração completa</small>
+                      </div>
+                    </div>
+                    <div className="video-thumbnail">
+                      <div className="thumbnail-content">
+                        <div className="thumbnail-header">
+                          <span className="thumbnail-logo">📡 GSX</span>
+                          <span className="thumbnail-title">ALERTA TABAJARA</span>
+                        </div>
+                        <div className="thumbnail-center">
+                          <div className="simulated-map">
+                            <div className="map-states">
+                              <div className="state-dot red">RJ</div>
+                              <div className="state-dot green">SC</div>
+                              <div className="state-dot yellow">CE</div>
+                              <div className="state-dot green">PE</div>
+                              <div className="state-dot green">AL</div>
+                              <div className="state-dot green">BA</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="thumbnail-footer">
+                          <span>Sistema de Emergência em Tempo Real</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="video-playing">
+                    <div className="loading-video">
+                      <div className="video-progress">
+                        <div className="progress-bar"></div>
+                      </div>
+                      <div className="playing-content">
+                        <h3>🎬 Reproduzindo...</h3>
+                        <p>"Bem-vindos ao Sistema GSX Alerta Tabajara, onde a tecnologia de ponta encontra a criatividade brasileira para salvar vidas!"</p>
+                        <div className="video-controls">
+                          <span className="time-indicator">⏱️ 00:03 / 03:00</span>
+                          <span className="quality-indicator">🎥 HD Quality</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="video-caption">
+                <small>
+                  💡 <strong>Dica:</strong> Este é um placeholder. O vídeo final será criado com IA 
+                  no estilo "Tabajara" para apresentação do projeto.
+                </small>
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* SEÇÃO 1: O PROJETO */}
-        <section className="projeto-section">
+        {/* === SEÇÃO PROBLEMA === */}
+        <section className="problema-section">
           <div className="gsx-card">
-            <h2>🎯 O Projeto</h2>
-            <div className="content-grid">
-              <div className="text-content">
-                <h3>Problema Fictício Identificado</h3>
-                <p>
-                  Os estados costeiros brasileiros (RJ, SC, CE, PE, AL, BA) enfrentam múltiplos riscos climáticos: 
-                  tsunamis, enchentes, incêndios e eventos meteorológicos extremos. A população frequentemente 
-                  não recebe alertas em tempo real ou não sabe como reagir adequadamente.
-                </p>
-                
-                <h3>Nossa Solução</h3>
-                <p>
-                  Sistema que simula o monitoramento de sensores IoT para detectar riscos e emitir alertas 
-                  automáticos com instruções específicas da Defesa Civil. O diferencial é o 
-                  <strong> pop-up de emergência automático</strong> que orienta o usuário diretamente 
-                  para abrigos disponíveis.
-                </p>
+            <div className="section-header">
+              <h2>🌍 O Problema que Resolvemos</h2>
+              <p>Por que os estados costeiros brasileiros precisam de um sistema como este?</p>
+            </div>
+            
+            <div className="problema-content">
+              <div className="problema-stats">
+                <div className="problema-item urgente">
+                  <div className="stat-number">75%</div>
+                  <div className="stat-label">da população não sabe como reagir a emergências climáticas</div>
+                </div>
+                <div className="problema-item critico">
+                  <div className="stat-number">6</div>
+                  <div className="stat-label">estados costeiros expostos a múltiplos riscos simultâneos</div>
+                </div>
+                <div className="problema-item importante">
+                  <div className="stat-number">15min</div>
+                  <div className="stat-label">tempo médio para tsunami atingir costa após sismo</div>
+                </div>
               </div>
               
-              <div className="stats-box">
-                <h3>Números do Projeto</h3>
-                <div className="stat-item">
-                  <span className="stat-number">6</span>
-                  <span className="stat-label">Estados Monitorados</span>
+              <div className="riscos-grid">
+                <div className="risco-card">
+                  <div className="risco-header">
+                    <span className="risco-emoji">🌊</span>
+                    <h3>Tsunamis & Enchentes</h3>
+                  </div>
+                  <p>Eventos que podem devastar regiões inteiras em minutos, exigindo evacuação imediata e rotas seguras.</p>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">3</span>
-                  <span className="stat-label">Tipos de Emergência</span>
+                
+                <div className="risco-card">
+                  <div className="risco-header">
+                    <span className="risco-emoji">🔥</span>
+                    <h3>Incêndios Florestais</h3>
+                  </div>
+                  <p>Condições climáticas extremas que podem causar incêndios de grandes proporções, especialmente no verão.</p>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">24/7</span>
-                  <span className="stat-label">Monitoramento</span>
+                
+                <div className="risco-card">
+                  <div className="risco-header">
+                    <span className="risco-emoji">⏰</span>
+                    <h3>Falta de Tempo</h3>
+                  </div>
+                  <p>Em emergências, cada segundo conta. Sistemas manuais não conseguem processar e alertar com velocidade necessária.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SEÇÃO 2: TECNOLOGIAS */}
-        <section className="tecnologias-section">
+        {/* === SEÇÃO SOLUÇÃO === */}
+        <section className="solucao-section">
           <div className="gsx-card">
-            <h2>🛠️ Stack Tecnológica</h2>
+            <div className="section-header">
+              <h2>💡 Nossa Solução Tabajara</h2>
+              <p>Sistema que funciona mesmo sendo "meio gambiarra" - mas salva vidas!</p>
+            </div>
             
-            <div className="tech-grid">
-              {/* FRONTEND */}
+            <div className="solucao-features">
+              <div className="feature-principal">
+                <div className="feature-destaque">
+                  <span className="destaque-icon">🚨</span>
+                  <h3>Pop-up de Emergência Inteligente</h3>
+                  <p>
+                    <strong>O grande diferencial:</strong> Quando detectamos uma emergência crítica, 
+                    um pop-up aparece automaticamente com instruções específicas da Defesa Civil 
+                    e te redireciona diretamente para o abrigo mais próximo disponível.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="features-grid">
+                <div className="feature-card">
+                  <span className="feature-icon">📊</span>
+                  <h4>Monitoramento 24/7</h4>
+                  <p>Sensores simulados coletam dados em tempo real de temperatura, umidade, ventos e atividade sísmica.</p>
+                </div>
+                
+                <div className="feature-card">
+                  <span className="feature-icon">🤖</span>
+                  <h4>Algoritmos de Risco</h4>
+                  <p>Cálculos baseados em thresholds científicos reais do CEMADEN, INMET e Defesa Civil.</p>
+                </div>
+                
+                <div className="feature-card">
+                  <span className="feature-icon">🗺️</span>
+                  <h4>Rotas de Evacuação</h4>
+                  <p>Sistema identifica abrigos disponíveis por proximidade e capacidade, calculando rotas otimizadas.</p>
+                </div>
+                
+                <div className="feature-card">
+                  <span className="feature-icon">📱</span>
+                  <h4>Interface Intuitiva</h4>
+                  <p>Design responsivo que funciona em qualquer dispositivo, com instruções claras para situações de pânico.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* === SEÇÃO ESTATÍSTICAS === */}
+        <section className="estatisticas-section">
+          <div className="stats-container">
+            <h2>📈 Sistema em Números</h2>
+            <div className={`stats-grid ${estatisticasCarregadas ? 'loaded' : ''}`}>
+              <div className="stat-card">
+                <div className="stat-icon">🗺️</div>
+                <div className="stat-number">6</div>
+                <div className="stat-label">Estados Monitorados</div>
+                <div className="stat-detail">RJ, SC, CE, PE, AL, BA</div>
+              </div>
+              
+              <div className="stat-card">
+                <div className="stat-icon">🚨</div>
+                <div className="stat-number">3</div>
+                <div className="stat-label">Tipos de Emergência</div>
+                <div className="stat-detail">Tsunami, Enchente, Incêndio</div>
+              </div>
+              
+              <div className="stat-card">
+                <div className="stat-icon">🏠</div>
+                <div className="stat-number">47</div>
+                <div className="stat-label">Abrigos Cadastrados</div>
+                <div className="stat-detail">Escolas, ginásios, centros</div>
+              </div>
+              
+              <div className="stat-card">
+                <div className="stat-icon">⚡</div>
+                <div className="stat-number">&lt;30s</div>
+                <div className="stat-label">Tempo de Resposta</div>
+                <div className="stat-detail">Detecção até alerta</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* === SEÇÃO CTA === */}
+        <section className="cta-section">
+          <div className="cta-container">
+            <div className="cta-content">
+              <h2>🚀 Explore o Sistema Agora</h2>
+              <p>Teste todas as funcionalidades do nosso protótipo funcional</p>
+              
+              <div className="cta-buttons">
+                <a href="/monitoramento" className="gsx-button gsx-button-primary cta-primary">
+                  📊 Ver Dashboard em Tempo Real
+                </a>
+                <a href="/orientacoes" className="gsx-button gsx-button-secondary cta-secondary">
+                  🆘 Simular Emergência
+                </a>
+              </div>
+              
+              <div className="cta-features">
+                <span className="cta-feature">✅ Simulação interativa</span>
+                <span className="cta-feature">✅ Dados realistas</span>
+                <span className="cta-feature">✅ Interface responsiva</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* === SEÇÃO TECNOLOGIA === */}
+        <section className="tech-overview">
+          <div className="gsx-card">
+            <div className="section-header">
+              <h2>🛠️ Tecnologia Aplicada</h2>
+              <p>Stack moderno para máxima confiabilidade e performance</p>
+            </div>
+            
+            <div className="tech-stack">
               <div className="tech-category">
                 <h3>Frontend</h3>
-                <div className="tech-list">
-                  <div className="tech-item">
-                    <span className="tech-icon">⚛️</span>
-                    <div className="tech-info">
-                      <strong>React 19</strong>
-                      <p>Interface componentizada e estado reativo</p>
-                    </div>
-                  </div>
-                  <div className="tech-item">
-                    <span className="tech-icon">🎨</span>
-                    <div className="tech-info">
-                      <strong>CSS3 + Design próprio</strong>
-                      <p>Identidade visual consistente e responsiva</p>
-                    </div>
-                  </div>
-                  <div className="tech-item">
-                    <span className="tech-icon">📊</span>
-                    <div className="tech-info">
-                      <strong>Chart.js</strong>
-                      <p>Visualização de dados meteorológicos</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* BACKEND */}
-              <div className="tech-category">
-                <h3>Backend & Dados</h3>
-                <div className="tech-list">
-                  <div className="tech-item">
-                    <span className="tech-icon">🐍</span>
-                    <div className="tech-info">
-                      <strong>Python 3</strong>
-                      <p>Processamento de dados e cálculo de riscos</p>
-                    </div>
-                  </div>
-                  <div className="tech-item">
-                    <span className="tech-icon">🗄️</span>
-                    <div className="tech-info">
-                      <strong>SQLite</strong>
-                      <p>Banco local para dados de sensores</p>
-                    </div>
-                  </div>
-                  <div className="tech-item">
-                    <span className="tech-icon">📋</span>
-                    <div className="tech-info">
-                      <strong>JSON APIs</strong>
-                      <p>Comunicação entre backend e frontend</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* FERRAMENTAS */}
-              <div className="tech-category">
-                <h3>Ferramentas</h3>
-                <div className="tech-list">
-                  <div className="tech-item">
-                    <span className="tech-icon">📦</span>
-                    <div className="tech-info">
-                      <strong>Git + GitHub</strong>
-                      <p>Controle de versão e colaboração</p>
-                    </div>
-                  </div>
-                  <div className="tech-item">
-                    <span className="tech-icon">⚡</span>
-                    <div className="tech-info">
-                      <strong>Node.js + npm</strong>
-                      <p>Ambiente de desenvolvimento React</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SEÇÃO 3: METODOLOGIA */}
-        <section className="metodologia-section">
-          <div className="gsx-card">
-            <h2>🔬 Metodologia de Cálculo de Riscos</h2>
-            
-            <div className="metodologia-content">
-              <div className="algoritmo-overview">
-                <h3>Algoritmos de Análise</h3>
-                <p>
-                  Os riscos são calculados usando <strong>thresholds científicos</strong> baseados em 
-                  dados reais de órgãos como CEMADEN, INMET e Defesa Civil.
-                </p>
-              </div>
-
-              <div className="risk-types">
-                <div className="risk-card">
-                  <h4>🔥 Risco de Incêndio</h4>
-                  <ul>
-                    <li><strong>Temperatura:</strong> Crítica acima de 35°C</li>
-                    <li><strong>Umidade:</strong> Perigosa abaixo de 30%</li>
-                    <li><strong>Vento:</strong> Crítico acima de 20 m/s</li>
-                    <li><strong>Precipitação:</strong> Seca prolongada (&lt; 2mm/7dias)</li>
-                  </ul>
-                </div>
-
-                <div className="risk-card">
-                  <h4>🌊 Risco de Enchente</h4>
-                  <ul>
-                    <li><strong>Chuva 1h:</strong> Intensa acima de 50mm</li>
-                    <li><strong>Chuva 24h:</strong> Crítica acima de 100mm</li>
-                    <li><strong>Chuva 72h:</strong> Solo saturado (&gt; 180mm)</li>
-                    <li><strong>Nível do mar:</strong> Alto acima de 2.5m</li>
-                  </ul>
-                </div>
-
-                <div className="risk-card">
-                  <h4>🌊 Risco de Tsunami</h4>
-                  <ul>
-                    <li><strong>Magnitude:</strong> Mínima 6.0 (escala Richter)</li>
-                    <li><strong>Magnitude crítica:</strong> Acima de 7.5</li>
-                    <li><strong>Profundidade:</strong> Terremotos rasos (&lt; 70km)</li>
-                    <li><strong>Localização:</strong> Próximo à costa (&lt; 1000km)</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="scoring-system">
-                <h3>Sistema de Pontuação</h3>
-                <div className="score-explanation">
-                  <div className="score-item">
-                    <span className="score-range verde">0-24 pontos</span>
-                    <span className="score-level">🟢 VERDE - Situação Normal</span>
-                  </div>
-                  <div className="score-item">
-                    <span className="score-range amarelo">25-49 pontos</span>
-                    <span className="score-level">🟡 AMARELO - Atenção</span>
-                  </div>
-                  <div className="score-item">
-                    <span className="score-range laranja">50-74 pontos</span>
-                    <span className="score-level">🟠 LARANJA - Alerta</span>
-                  </div>
-                  <div className="score-item">
-                    <span className="score-range vermelho">75+ pontos</span>
-                    <span className="score-level">🔴 VERMELHO - Emergência</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SEÇÃO 4: DESENVOLVIMENTO */}
-        <section className="desenvolvimento-section">
-          <div className="gsx-card">
-            <h2>⚙️ Processo de Desenvolvimento</h2>
-            
-            <div className="processo-timeline">
-              <div className="timeline-item">
-                <div className="timeline-marker">1</div>
-                <div className="timeline-content">
-                  <h3>Análise e Planejamento</h3>
-                  <p>
-                    Estudo dos principais riscos climáticos dos estados costeiros e 
-                    definição dos requisitos funcionais do sistema.
-                  </p>
-                </div>
-              </div>
-
-              <div className="timeline-item">
-                <div className="timeline-marker">2</div>
-                <div className="timeline-content">
-                  <h3>Modelagem de Dados</h3>
-                  <p>
-                    Criação do banco SQLite com tabelas para estados, sensores e abrigos. 
-                    Desenvolvimento dos algoritmos de geração de dados mockados.
-                  </p>
-                </div>
-              </div>
-
-              <div className="timeline-item">
-                <div className="timeline-marker">3</div>
-                <div className="timeline-content">
-                  <h3>Backend Python</h3>
-                  <p>
-                    Implementação dos calculadores de risco, sistema de alertas e 
-                    exportação de dados para JSON consumível pelo frontend.
-                  </p>
-                </div>
-              </div>
-
-              <div className="timeline-item">
-                <div className="timeline-marker">4</div>
-                <div className="timeline-content">
-                  <h3>Interface React</h3>
-                  <p>
-                    Desenvolvimento do frontend com identidade visual própria, 
-                    componentes reutilizáveis e sistema de pop-ups de emergência.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="desafios-box">
-              <h3>🎯 Principais Desafios Superados</h3>
-              <div className="desafios-grid">
-                <div className="desafio-item">
-                  <h4>Correlação Temporal</h4>
-                  <p>Gerar dados realistas que seguem padrões climáticos naturais (temperatura mais alta à tarde, etc.)</p>
-                </div>
-                <div className="desafio-item">
-                  <h4>Sistema de Alertas</h4>
-                  <p>Lógica complexa para determinar quando emitir alertas baseados em múltiplos fatores de risco</p>
-                </div>
-                <div className="desafio-item">
-                  <h4>UX de Emergência</h4>
-                  <p>Pop-up que não pode ser ignorado mas não frustra o usuário em situações normais</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SEÇÃO 5: DADOS E LIMITAÇÕES */}
-        <section className="limitacoes-section">
-          <div className="gsx-card">
-            <h2>📊 Dados e Considerações</h2>
-            
-            <div className="consideracoes-content">
-              <div className="dados-info">
-                <h3>🔍 Fonte dos Dados</h3>
-                <p>
-                  Este é um <strong>projeto acadêmico com dados simulados</strong>. Os algoritmos 
-                  são baseados em thresholds reais de órgãos científicos, mas os valores dos 
-                  sensores são gerados algoritmicamente para demonstração.
-                </p>
-                
-                <div className="fontes-list">
-                  <div className="fonte-item">
-                    <a href="Link CEMADEN"><strong>CEMADEN: </strong>Thresholds de enchente e precipitação</a>
-                  </div>
-                  <div className="fonte-item"> 
-                    <a href="Link INMET"><strong>INMET: </strong>Parâmetros meteorológicos</a>
-                  </div>
-                  <div className="fonte-item">                    
-                    <a href="Link Defesa Civil"><strong>Defesa Civil: </strong>Protocolos de emergência</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="futuras-melhorias">
-                <h3>🚀 Evoluções Futuras</h3>
-                <ul>
-                  <li>Integração com APIs reais de sensores IoT</li>
-                  <li>Machine Learning para predição de padrões</li>
-                  <li>Notificações push mobile</li>
-                  <li>Integração com sistemas da Defesa Civil</li>
-                  <li>Mapas interativos com rotas de evacuação</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FOOTER DA PÁGINA */}
-        <section className="projeto-footer">
-          <div className="gsx-card">
-            <div className="footer-content">
-              <h3>📝 Informações do Projeto</h3>
-              <div className="projeto-meta">
-                <div className="meta-item">
-                  <strong>Instituição:</strong> FIAP
-                </div>
-                <div className="meta-item">
-                  <strong>Projeto:</strong> Global Solutions 2
-                </div>
-                <div className="meta-item">
-                  <strong>Turma:</strong> 1ESOR
-                </div>
-                <div className="meta-item">
-                  <strong>Tipo:</strong> Protótipo Funcional (MVP)
+                <div className="tech-items">
+                  <span className="tech-badge">⚛️ React 19</span>
+                  <span className="tech-badge">🎨 CSS3</span>
+                  <span className="tech-badge">📊 Chart.js</span>
                 </div>
               </div>
               
-              <div className="tecnologias-footer">
-                <p>
-                  <strong>Stack:</strong> React + Python + SQLite + CSS3 + Chart.js
-                </p>
-                <p>
-                  <a href="https://github.com/NGDMN/GS_Alerta_Tabajara"><strong>Repositório Git + GitHub</strong></a>
-
-                </p>
+              <div className="tech-category">
+                <h3>Backend & Dados</h3>
+                <div className="tech-items">
+                  <span className="tech-badge">🐍 Python</span>
+                  <span className="tech-badge">🗄️ SQLite</span>
+                  <span className="tech-badge">📋 JSON APIs</span>
+                </div>
               </div>
+              
+              <div className="tech-category">
+                <h3>Ferramentas</h3>
+                <div className="tech-items">
+                  <span className="tech-badge">📦 Git + GitHub</span>
+                  <span className="tech-badge">⚡ Node.js</span>
+                  <span className="tech-badge">🔧 VS Code</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="tech-highlight">
+              <p>
+                <strong>💡 Diferencial Técnico:</strong> Sistema desenvolvido inteiramente com 
+                tecnologias do currículo FIAP, demonstrando aplicação prática dos conhecimentos 
+                adquiridos em um contexto real de utilidade pública.
+              </p>
             </div>
           </div>
         </section>
@@ -361,4 +350,4 @@ function Sobre() {
   );
 }
 
-export default Sobre;
+export default Home;
