@@ -17,7 +17,7 @@ function Sobre() {
       titulo: 'Estágio RH - Pagamentos',
       empresa: 'CNH Industrial',
       descricao: 'Estudante de Ciências Contábeis aceito para estágio. Primeiro contato profundo com Excel para gestão de pagamentos do RH.',
-      tecnologias: ['Excel', 'Sistemas RH'],
+      tecnologias: ['Excel'],
       resultado: null
     },
     {
@@ -44,8 +44,8 @@ function Sobre() {
       titulo: 'Primeiro Sistema Próprio',
       empresa: 'CNH Industrial',
       descricao: 'Criação de formulário de avaliação com Pipefy para automatizar fluxo de reclamações de serviços (café, restaurante, táxi).',
-      tecnologias: ['Pipefy', 'Automação de Processos'],
-      resultado: 'Sistema implementado com sucesso'
+      tecnologias: ['Pipefy', 'Power Automate', 'VBA'],
+      resultado: 'Aumento na qualidade do serviço prestado'
     },
     {
       ano: '2021',
@@ -71,16 +71,16 @@ function Sobre() {
       titulo: 'Especialista em Automações',
       empresa: 'Votorantim',
       descricao: 'Efetivado e focado em automações de processos contábeis. Maior impacto em redução de tempo operacional.',
-      tecnologias: ['Automação Contábil', 'Process Mining'],
+      tecnologias: ['Power Automate', 'VBA'],
       resultado: 'Fechamento trimestral: 4h → 1h30 (redução de 62%)'
     },
     {
       ano: '2024',
-      tipo: 'ESPECIALIZAÇÃO',
+      tipo: 'Migração',
       titulo: 'Núcleo de Automações',
       empresa: 'Votorantim',
-      descricao: 'Migração para núcleo especializado em automação e melhoria de processos. Liderança em projetos de otimização.',
-      tecnologias: ['Process Automation', 'Business Intelligence'],
+      descricao: 'Migração para núcleo especializado em automação e melhoria de processos.',
+      tecnologias: ['Power Automate', 'VBA', 'Power BI', 'Python'],
       resultado: null
     },
     {
@@ -97,18 +97,18 @@ function Sobre() {
       tipo: 'SAÍDA',
       titulo: 'Fim do Ciclo Corporativo',
       empresa: 'Votorantim',
-      descricao: 'Decisão estratégica de sair para focar 100% na transição para engenharia de dados.',
+      descricao: 'Cíclo na Votorantim chega ao fim.',
       tecnologias: [],
-      resultado: 'Foco total em tech'
+      resultado: 'Foco deixa de ser automações, abrindo um leque de possibilidades.'
     },
     {
       ano: '2025',
       tipo: 'EMPREENDEDORISMO',
       titulo: 'Goodman Solution Experts',
       empresa: 'Própria',
-      descricao: 'Abertura de CNPJ para atuar como consultor enquanto busca recolocação como estagiário de engenharia de dados.',
-      tecnologias: ['Consultoria', 'Automação'],
-      resultado: 'Independência financeira durante transição'
+      descricao: 'Abertura de CNPJ para atuar como freelancer enquanto busca recolocação como estagiário de engenharia de dados.',
+      tecnologias: ['Python', 'SQL', "React"],
+      resultado: 'Atuação em projetos de automações, frontend e dados'
     },
     {
       ano: '2025',
@@ -117,7 +117,7 @@ function Sobre() {
       empresa: 'FIAP - Global Solutions',
       descricao: 'Desenvolvimento de sistema completo integrando backend Python, banco SQLite e frontend React. Projeto que demonstra evolução técnica completa.',
       tecnologias: ['Python', 'SQLite', 'React', 'CSS3', 'JavaScript'],
-      resultado: 'Portfolio técnico consolidado'
+      resultado: 'Não sei vocês, mas eu gostei!'
     }
   ];
 
