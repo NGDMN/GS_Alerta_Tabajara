@@ -30,7 +30,7 @@
   background: var(--color-tech-white);
   border-radius: var(--border-radius);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  border: 3px solid var(--cor-alerta, #DC2626);
+  border: 3px solid var(--alert-vermelho);
   
   /* ANIMAÇÃO */
   animation: popupSlideIn 0.4s ease-out;
@@ -44,8 +44,8 @@
 /* ===== HEADER URGENTE ===== */
 .popup-header {
   background: linear-gradient(135deg, 
-    var(--cor-alerta, #DC2626) 0%, 
-    color-mix(in srgb, var(--cor-alerta, #DC2626) 80%, black) 100%
+    var(--alert-vermelho) 0%, 
+    color-mix(in srgb, var(--alert-vermelho) 80%, black) 100%
   );
   color: white;
   padding: var(--spacing-md);
@@ -159,14 +159,14 @@
 .alert-instructions {
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
-  background: rgba(220, 38, 38, 0.05);
-  border-left: 4px solid var(--cor-alerta, #DC2626);
+  background: var(--alert-vermelho-bg);
+  border-left: 4px solid var(--alert-vermelho);
   border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
 }
 
 .alert-instructions h3 {
   margin: 0 0 var(--spacing-sm) 0;
-  color: var(--cor-alerta, #DC2626);
+  color: var(--alert-vermelho);
   font-size: 1.1rem;
 }
 
@@ -240,8 +240,8 @@
 }
 
 .checkbox-container input:checked + .checkmark {
-  background: var(--cor-alerta, #DC2626);
-  border-color: var(--cor-alerta, #DC2626);
+  background: var(--alert-vermelho);
+  border-color: var(--alert-vermelho);
 }
 
 .checkbox-container input:checked + .checkmark::after {
@@ -295,13 +295,13 @@
 }
 
 .btn-confirmar {
-  background: var(--cor-alerta, #DC2626);
+  background: var(--alert-vermelho);
   color: white;
   min-width: 200px;
 }
 
 .btn-confirmar:hover {
-  background: color-mix(in srgb, var(--cor-alerta, #DC2626) 80%, black);
+  background: color-mix(in srgb, var(--alert-vermelho) 80%, black);
   transform: translateY(-1px);
 }
 
@@ -337,8 +337,8 @@
 .urgency-fill {
   height: 100%;
   background: linear-gradient(90deg, 
-    var(--cor-alerta, #DC2626), 
-    color-mix(in srgb, var(--cor-alerta, #DC2626) 70%, white)
+    var(--alert-vermelho), 
+    color-mix(in srgb, var(--alert-vermelho) 70%, white)
   );
   animation: urgencyPulse 2s infinite;
 }

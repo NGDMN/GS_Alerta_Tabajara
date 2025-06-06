@@ -1,349 +1,72 @@
-/* src/pages/Sobre.css - NEIL GOODMAN PORTFOLIO */
+/* src/pages/Sobre.css */
 
 .sobre {
-  /* QUESTÃO: Por que min-height ao invés de height fixa? */
-  min-height: 100vh;
-  /* RESPOSTA: Conteúdo pode crescer sem quebrar, principalmente em mobile */
+  /* ANIMAÇÃO: Herda page-enter do App.css */
+  /* SPACING: Seções bem separadas */
 }
 
-/* === HEADER PESSOAL === */
-.profile-header {
-  /* GRADIENTE: Mesmo padrão do sistema para consistência */
-  background: linear-gradient(135deg, 
-    var(--color-deep-blue) 0%, 
-    var(--color-electric-blue) 100%
-  );
-  color: var(--color-tech-white);
-  padding: var(--spacing-xl) 0;
-  margin-bottom: var(--spacing-xl);
-  
-  /* PERGUNTA CRÍTICA: Por que não usar uma imagem de fundo? */
-  /* RESPOSTA: Gradiente CSS é mais performático, responsivo e mantém consistência visual */
-}
-
-.profile-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-lg);
-}
-
-.profile-info {
-  /* GRID: Por que grid e não flexbox aqui? Pense... */
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-xl);
-  align-items: start;
-  /* RESPOSTA: Grid permite controle preciso de proporções e alinhamento em 2D */
-}
-
-/* === TEXTO DO PERFIL === */
-.profile-text h1 {
-  /* HIERARQUIA: Tamanho estratégico para primeira impressão */
-  font-size: 3rem;
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-tech-white);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  
-  /* QUESTÃO AVANÇADA: Por que text-shadow em títulos sobre gradiente? */
-  /* RESPOSTA: Melhora legibilidade e cria separação visual do fundo */
-}
-
-.profile-text h2 {
-  /* SUBTÍTULO: Cor diferenciada para hierarquia clara */
-  font-size: 1.5rem;
-  color: var(--color-data-green);
-  margin-bottom: var(--spacing-md);
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-.profile-description {
-  /* DESCRIÇÃO: Espaçamento calculado para legibilidade ótima */
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
-  color: var(--color-tech-white);
-  opacity: 0.95;
-  
-  /* DESAFIO: Por que line-height 1.6 especificamente? */
-  /* RESPOSTA: Proporção áurea para texto corrido - máxima legibilidade */
-}
-
-/* === METADADOS === */
-.profile-meta {
-  /* FLEXBOX: Melhor para itens em linha com wrap */
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
-
-.meta-item {
-  /* BADGE: Design funcional e elegante */
-  background: rgba(255, 255, 255, 0.15);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-small);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 0.9rem;
-  font-weight: 500;
-  
-  /* ANÁLISE CRÍTICA: Por que background com transparência? */
-  /* RESPOSTA: Integra com gradiente mantendo legibilidade */
-}
-
-/* === AÇÕES DO PERFIL === */
-.profile-actions {
-  /* AÇÕES: Container flexível para botões e contatos */
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-  align-items: flex-end;
-}
-
-.contact-buttons {
-  /* BOTÕES: Espaçamento estratégico para ação */
-  display: flex;
-  gap: var(--spacing-sm);
-}
-
-.contact-btn {
-  /* CUSTOMIZAÇÃO: Sobrescreve estilos padrão do sistema */
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  min-width: 120px;
-  text-align: center;
-}
-
-.contact-btn:hover {
-  /* INTERAÇÃO: Elevação sutil para feedback */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.contact-info {
-  /* INFO: Lista de contatos secundários */
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  text-align: right;
-}
-
-.contact-detail {
-  /* DETALHE: Informação de contato individual */
-  font-size: 0.9rem;
-  opacity: 0.9;
-  font-weight: 500;
-}
-
-/* === JORNADA TÉCNICA === */
-.jornada-section {
+.sobre section {
+  /* ESPAÇAMENTO: Entre seções principais */
   margin-bottom: var(--spacing-xl);
 }
 
-.jornada-timeline {
-  /* TIMELINE: Estrutura vertical para narrativa cronológica */
-  position: relative;
-  padding-left: var(--spacing-xl);
-}
-
-.jornada-timeline::before {
-  /* LINHA: Conecta todos os pontos da timeline */
-  content: '';
-  position: absolute;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, 
-    var(--color-electric-blue) 0%,
-    var(--color-innovation-purple) 100%
-  );
-  border-radius: 2px;
-  
-  /* QUESTÃO TÉCNICA: Por que gradiente na linha da timeline? */
-  /* RESPOSTA: Representa evolução/progresso visual da jornada */
-}
-
-.timeline-item {
-  /* ITEM: Cada evento da jornada */
-  position: relative;
-  margin-bottom: var(--spacing-xl);
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-md);
-}
-
-.timeline-item:last-child {
+.sobre section:last-child {
+  /* ÚLTIMA SEÇÃO: Sem margin bottom */
   margin-bottom: 0;
 }
 
-.timeline-marker {
-  /* MARCADOR: Ponto visual na timeline */
-  position: absolute;
-  left: -32px;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  background: var(--color-tech-white);
-  border: 4px solid var(--color-electric-blue);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-icon {
-  /* ÍCONE: Representação visual do evento */
-  font-size: 1.25rem;
-}
-
-.timeline-content {
-  /* CONTEÚDO: Card de informações do evento */
-  background: var(--color-tech-white);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius);
-  border-left: 6px solid var(--color-electric-blue);
-  box-shadow: var(--shadow-light);
-  flex: 1;
-  transition: all 0.3s ease;
-}
-
-.timeline-content:hover {
-  /* INTERAÇÃO: Destaque no hover */
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-strong);
-  border-left-color: var(--color-data-green);
-}
-
-.timeline-content h3 {
-  /* TÍTULO: Empresa/Instituição */
-  color: var(--color-deep-blue);
-  font-size: 1.5rem;
-  margin-bottom: var(--spacing-xs);
-}
-
-.timeline-content h4 {
-  /* SUBTÍTULO: Cargo/Posição */
-  color: var(--color-electric-blue);
-  font-size: 1.1rem;
-  margin-bottom: var(--spacing-sm);
-  font-weight: 600;
-}
-
-.timeline-content p {
-  /* DESCRIÇÃO: Experiência detalhada */
-  color: var(--color-graphite);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-md);
-}
-
-/* === TAGS TECNOLÓGICAS === */
-.tech-used {
-  /* CONTAINER: Flex para tags */
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-
-.tech-tag {
-  /* TAG: Badge individual de tecnologia */
-  background: var(--color-light-gray);
-  color: var(--color-deep-blue);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-small);
-  font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-}
-
-.tech-tag:hover {
-  /* MICRO-INTERAÇÃO: Destaque individual */
-  background: var(--color-electric-blue);
-  color: var(--color-tech-white);
-  transform: translateY(-1px);
-}
-
 /* === SEÇÃO PROJETO === */
-.projeto-section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.projeto-grid {
-  /* GRID: Layout para motivação + stats */
+.projeto-section .content-grid {
+  /* LAYOUT: Texto + estatísticas lado a lado */
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg);
   align-items: start;
 }
 
-.projeto-motivacao h3 {
+.text-content h3 {
+  /* SUBTÍTULOS: Destaque sem competir com h2 */
   color: var(--color-electric-blue);
-  margin-bottom: var(--spacing-md);
-}
-
-.motivacao-pontos {
-  /* PONTOS: Lista visual de motivações */
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
-}
-
-.ponto-item {
-  /* ITEM: Ponto individual */
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-xs);
-  background: var(--color-light-gray);
-  border-radius: var(--border-radius-small);
-  font-weight: 500;
-}
-
-.ponto-icon {
   font-size: 1.25rem;
-  flex-shrink: 0;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
-/* === ESTATÍSTICAS DO PROJETO === */
-.projeto-stats {
+.text-content h3:first-child {
+  /* PRIMEIRO H3: Sem margin top */
+  margin-top: 0;
+}
+
+.stats-box {
+  /* CAIXA: Estatísticas destacadas */
   background: var(--color-light-gray);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
   border-radius: var(--border-radius);
-  border-left: 6px solid var(--color-data-green);
+  border-left: 4px solid var(--color-electric-blue);
 }
 
-.projeto-stats h3 {
+.stats-box h3 {
+  /* TÍTULO: Menor que seção principal */
+  font-size: 1.1rem;
   color: var(--color-deep-blue);
   margin-bottom: var(--spacing-md);
+}
+
+.stats-box .stat-item {
+  /* ITEM: Número + label */
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs);
 }
 
-.stats-projeto {
-  /* GRID: 2x2 para estatísticas */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
+.stats-box .stat-item:last-child {
+  margin-bottom: 0;
 }
 
-.stat-projeto {
-  /* STAT: Estatística individual */
-  text-align: center;
-  padding: var(--spacing-sm);
-  background: var(--color-tech-white);
-  border-radius: var(--border-radius-small);
-}
-
-.stat-projeto .stat-number {
-  /* NÚMERO: Destaque visual */
-  display: block;
+.stats-box .stat-number {
+  /* NÚMERO: Grande e chamativo */
   font-size: 2rem;
   font-weight: 700;
   color: var(--color-electric-blue);
@@ -351,545 +74,844 @@
   line-height: 1;
 }
 
-.stat-projeto .stat-label {
-  /* LABEL: Descrição */
-  font-size: 0.8rem;
+.stats-box .stat-label {
+  /* LABEL: Explicativo */
+  font-size: 0.9rem;
   color: var(--color-mid-gray);
   font-weight: 500;
-  margin-top: var(--spacing-xs);
+  margin-top: 0.25rem;
 }
 
-/* === APRENDIZADOS === */
-.aprendizados-section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.aprendizados-grid {
-  /* GRID: 3 colunas para categorias */
+/* === SEÇÃO TECNOLOGIAS === */
+.tech-grid {
+  /* GRID: 3 colunas responsivas */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-lg);
 }
 
-.aprendizado-card {
-  /* CARD: Container de aprendizado */
-  background: var(--color-tech-white);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius);
-  border: 2px solid var(--color-light-gray);
-  transition: all 0.3s ease;
-}
-
-.aprendizado-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-strong);
-}
-
-/* CORES POR CATEGORIA */
-.aprendizado-card.backend {
-  border-left-color: var(--color-innovation-purple);
-}
-
-.aprendizado-card.frontend {
-  border-left-color: var(--color-electric-blue);
-}
-
-.aprendizado-card.integracao {
-  border-left-color: var(--color-data-green);
-}
-
-.aprendizado-card:hover.backend {
-  border-color: var(--color-innovation-purple);
-}
-
-.aprendizado-card:hover.frontend {
-  border-color: var(--color-electric-blue);
-}
-
-.aprendizado-card:hover.integracao {
-  border-color: var(--color-data-green);
-}
-
-.aprendizado-header {
-  /* HEADER: Ícone + título */
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.aprendizado-icon {
-  font-size: 2rem;
-}
-
-.aprendizado-header h3 {
-  color: var(--color-deep-blue);
-  margin: 0;
-  font-size: 1.25rem;
-}
-
-.skills-learned {
-  /* SKILLS: Container de habilidades */
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-  margin-top: var(--spacing-md);
-}
-
-.skill-tag {
-  /* TAG: Habilidade individual */
+.tech-category {
+  /* CATEGORIA: Container para cada grupo */
   background: var(--color-light-gray);
-  color: var(--color-graphite);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--border-radius-small);
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* === DESAFIOS === */
-.desafios-section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.desafio-principal {
-  /* PRINCIPAL: Card de destaque */
-  background: linear-gradient(135deg, 
-    var(--alert-laranja-bg) 0%, 
-    var(--alert-amarelo-bg) 100%
-  );
-  border: 2px solid var(--alert-laranja);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-xl);
-}
-
-.desafio-content h3 {
-  color: var(--alert-laranja);
-  font-size: 1.75rem;
-  margin-bottom: var(--spacing-md);
-}
-
-.desafio-detalhes {
-  /* DETALHES: Grid para sacrifícios vs estratégias */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
-  margin: var(--spacing-lg) 0;
-}
-
-.desafio-item {
-  /* ITEM: Container individual */
-  background: var(--color-tech-white);
   padding: var(--spacing-md);
-  border-radius: var(--border-radius-small);
-  border-left: 4px solid var(--alert-laranja);
+  border-radius: var(--border-radius);
+  border-top: 4px solid var(--color-innovation-purple);
 }
 
-.desafio-item h4 {
+.tech-category h3 {
+  /* TÍTULO: Categoria tecnológica */
+  color: var(--color-deep-blue);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.tech-list {
+  /* LISTA: Tecnologias da categoria */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.tech-item {
+  /* ITEM: Tecnologia individual */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.tech-item:hover {
+  /* HOVER: Elevação sutil */
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-light);
+}
+
+.tech-icon {
+  /* ÍCONE: Emoji grande */
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.tech-info {
+  /* INFO: Nome + descrição */
+  flex: 1;
+}
+
+.tech-info strong {
+  /* NOME: Tecnologia */
+  color: var(--color-deep-blue);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tech-info p {
+  /* DESCRIÇÃO: Função da tecnologia */
+  color: var(--color-mid-gray);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* === SEÇÃO METODOLOGIA === */
+.metodologia-content {
+  /* CONTEÚDO: Seções organizadas */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.algoritmo-overview {
+  /* OVERVIEW: Introdução da metodologia */
+  text-align: center;
+  padding: var(--spacing-md);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+}
+
+.algoritmo-overview h3 {
+  /* TÍTULO: Destaque */
   color: var(--color-deep-blue);
   margin-bottom: var(--spacing-sm);
 }
 
-.desafio-item ul {
+.risk-types {
+  /* TIPOS: Grid de riscos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.risk-card {
+  /* CARD: Tipo de risco individual */
+  background: var(--color-tech-white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-light-gray);
+  transition: all 0.2s ease;
+}
+
+.risk-card:hover {
+  /* HOVER: Destaque */
+  border-color: var(--color-electric-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+}
+
+.risk-card h4 {
+  /* TÍTULO: Tipo de risco */
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-display);
+}
+
+.risk-card ul {
+  /* LISTA: Critérios */
   margin: 0;
   padding-left: var(--spacing-md);
 }
 
-.desafio-item li {
+.risk-card li {
+  /* ITEM: Critério específico */
   margin-bottom: var(--spacing-xs);
   color: var(--color-graphite);
   line-height: 1.4;
 }
 
-.licoes-aprendidas {
-  /* LIÇÕES: Destaque especial */
-  background: var(--color-tech-white);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius-small);
-  border: 2px solid var(--color-data-green);
-  border-left: 6px solid var(--color-data-green);
+.risk-card li strong {
+  /* PARÂMETRO: Nome do critério */
+  color: var(--color-electric-blue);
 }
 
-.licoes-aprendidas h4 {
-  color: var(--color-data-green);
-  margin-bottom: var(--spacing-sm);
-}
-
-/* === FUTURO === */
-.futuro-section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.futuro-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-.objetivo-principal {
-  /* OBJETIVO: Card de destaque */
-  background: linear-gradient(135deg, 
-    var(--color-electric-blue) 0%, 
-    var(--color-innovation-purple) 100%
-  );
-  color: var(--color-tech-white);
-  padding: var(--spacing-xl);
-  border-radius: var(--border-radius);
-  text-align: center;
-}
-
-.objetivo-principal h3 {
-  color: var(--color-tech-white);
-  font-size: 2rem;
-  margin-bottom: var(--spacing-md);
-}
-
-.objetivo-principal p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin: 0;
-  opacity: 0.95;
-}
-
-/* === ROADMAP DE SKILLS === */
-.roadmap-skills {
+/* === SISTEMA DE PONTUAÇÃO === */
+.scoring-system {
+  /* SISTEMA: Explicação das cores */
   background: var(--color-light-gray);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius);
-}
-
-.roadmap-skills h3 {
-  color: var(--color-deep-blue);
-  margin-bottom: var(--spacing-lg);
-  text-align: center;
-}
-
-.skills-roadmap {
-  /* ROADMAP: Grid de categorias */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-lg);
-}
-
-.skill-category {
-  /* CATEGORIA: Container de skills por nível */
-  background: var(--color-tech-white);
   padding: var(--spacing-md);
-  border-radius: var(--border-radius-small);
-  border-left: 6px solid;
-}
-
-.skill-category.atual {
-  border-left-color: var(--alert-verde);
-}
-
-.skill-category.desenvolvendo {
-  border-left-color: var(--alert-amarelo);
-}
-
-.skill-category.futuro {
-  border-left-color: var(--color-electric-blue);
-}
-
-.skill-category h4 {
-  margin-bottom: var(--spacing-md);
-  font-size: 1.1rem;
-}
-
-.skill-list {
-  /* LIST: Flex container para skills */
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-
-.skill-item {
-  /* ITEM: Skill individual */
-  background: var(--color-light-gray);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--border-radius-small);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-graphite);
-}
-
-/* === OPORTUNIDADES === */
-.oportunidades {
-  background: var(--color-tech-white);
-  padding: var(--spacing-xl);
   border-radius: var(--border-radius);
-  border: 2px solid var(--color-data-green);
+}
+
+.scoring-system h3 {
+  /* TÍTULO: Centralizado */
   text-align: center;
-}
-
-.oportunidades h3 {
-  color: var(--color-data-green);
-  font-size: 1.75rem;
-  margin-bottom: var(--spacing-md);
-}
-
-.call-to-action {
-  margin-top: var(--spacing-lg);
-}
-
-.call-to-action p {
-  font-size: 1.25rem;
-  font-weight: 600;
   color: var(--color-deep-blue);
   margin-bottom: var(--spacing-md);
 }
 
-.contact-final {
-  /* FINAL: Botões de contato */
-  display: flex;
-  gap: var(--spacing-md);
-  justify-content: center;
-}
-
-/* === COMPETÊNCIAS === */
-.competencias-section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.competencias-grid {
-  /* GRID: 3 colunas para categorias */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-lg);
-}
-
-.competencia-categoria {
-  /* CATEGORIA: Container de competências */
-  background: var(--color-light-gray);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius);
-  border-top: 4px solid var(--color-electric-blue);
-}
-
-.competencia-categoria h3 {
-  color: var(--color-deep-blue);
-  margin-bottom: var(--spacing-md);
-  text-align: center;
-}
-
-.skill-items {
-  /* ITEMS: Lista de habilidades */
+.score-explanation {
+  /* EXPLICAÇÃO: Lista de níveis */
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
 }
 
-.skill-detail {
-  /* DETAIL: Habilidade com nível */
+.score-item {
+  /* ITEM: Faixa + nível */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+}
+
+.score-range {
+  /* FAIXA: Pontuação */
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  font-family: var(--font-display);
+  min-width: 100px;
+  text-align: center;
+  color: var(--color-tech-white);
+}
+
+.score-range.verde { background: var(--alert-verde); }
+.score-range.amarelo { background: var(--alert-amarelo); }
+.score-range.laranja { background: var(--alert-laranja); }
+.score-range.vermelho { background: var(--alert-vermelho); }
+
+.score-level {
+  /* NÍVEL: Descrição */
+  font-weight: 500;
+  color: var(--color-graphite);
+}
+
+/* === CARROSSEL DA JORNADA === */
+.jornada-section {
+  /* PRIORIDADE: Esta seção merece destaque especial */
+  margin-bottom: var(--spacing-xl);
+  background: linear-gradient(135deg, 
+    var(--color-light-gray) 0%, 
+    var(--color-tech-white) 100%
+  );
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  border-left: 6px solid var(--color-data-green);
+}
+
+.jornada-section h2 {
+  /* TÍTULO: Destaque para seção pessoal */
+  color: var(--color-deep-blue);
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.jornada-section p {
+  /* SUBTÍTULO: Centralizado e elegante */
+  text-align: center;
+  color: var(--color-mid-gray);
+  font-style: italic;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* === CONTAINER DO CARROSSEL === */
+.timeline-carrossel {
+  /* ESTRUTURA: Container principal do sistema */
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.carrossel-container {
+  /* SCROLL: Container com scroll horizontal */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* iOS suave */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  
+  /* MOBILE FIRST: Touch-friendly no mobile */
+  cursor: grab;
+}
+
+.carrossel-container:active {
+  cursor: grabbing;
+}
+
+.carrossel-container::-webkit-scrollbar {
+  /* CHROME/SAFARI: Esconde scrollbar */
+  display: none;
+}
+
+.carrossel-track {
+  /* TRACK: Trilha que contém todos os cards */
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0 var(--spacing-lg) 0;
+  
+  /* CÁLCULO TÉCNICO: Cada card = 80% da tela + gap */
+  width: fit-content;
+}
+
+/* === CARDS DE EXPERIÊNCIA === */
+.experiencia-card {
+  /* DIMENSÃO: Mobile-first - 80% da tela */
+  flex: 0 0 80vw;
+  max-width: 400px; /* Limite em desktop */
+  min-width: 280px; /* Mínimo para legibilidade */
+  
+  /* VISUAL: Card limpo e profissional */
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-light-gray);
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  
+  /* LAYOUT: Flexbox para organização interna */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.experiencia-card:hover {
+  /* HOVER: Feedback visual */
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  border-color: var(--color-electric-blue);
+}
+
+/* === HEADER DO CARD === */
+.experiencia-header {
+  /* LAYOUT: Ano e tipo lado a lado */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.experiencia-ano {
+  /* ANO: Destaque principal */
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+}
+
+.experiencia-tipo {
+  /* TIPO: Badge categorizado */
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  /* COR: Baseada no tipo */
+  background: var(--color-innovation-purple);
+  color: var(--color-tech-white);
+}
+
+/* VARIAÇÕES DE TIPO */
+.experiencia-card:nth-child(1) .experiencia-tipo,
+.experiencia-card:nth-child(2) .experiencia-tipo {
+  background: var(--color-data-green); /* Início */
+}
+
+.experiencia-card:nth-child(9) .experiencia-tipo,
+.experiencia-card:nth-child(12) .experiencia-tipo {
+  background: var(--color-electric-blue); /* Educação/Projeto */
+}
+
+.experiencia-card:nth-child(11) .experiencia-tipo {
+  background: var(--color-innovation-purple); /* Empreendedorismo */
+}
+
+/* === CONTEÚDO DO CARD === */
+.experiencia-titulo {
+  /* TÍTULO: Principal hierarquia */
+  color: var(--color-deep-blue);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.experiencia-empresa {
+  /* EMPRESA: Contexto */
+  color: var(--color-electric-blue);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.experiencia-descricao {
+  /* DESCRIÇÃO: Texto principal */
+  color: var(--color-graphite);
+  line-height: 1.5;
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-sm);
+  flex: 1; /* Ocupa espaço disponível */
+}
+
+/* === TECNOLOGIAS === */
+.experiencia-tecnologias {
+  /* CONTAINER: Tags de tecnologia */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tech-tag {
+  /* TAG: Tecnologia individual */
+  padding: 0.25rem 0.5rem;
+  background: var(--color-light-gray);
+  border: 1px solid var(--color-mid-gray);
+  border-radius: var(--border-radius-small);
+  font-size: 0.8rem;
+  color: var(--color-deep-blue);
+  font-weight: 500;
+}
+
+/* === RESULTADO === */
+.experiencia-resultado {
+  /* RESULTADO: Destaque especial */
+  padding: var(--spacing-sm);
+  background: var(--alert-verde-bg);
+  border-left: 4px solid var(--alert-verde);
+  border-radius: var(--border-radius-small);
+  font-size: 0.9rem;
+  color: var(--color-deep-blue);
+}
+
+.experiencia-resultado strong {
+  color: var(--alert-verde);
+}
+
+/* === CONTROLES DO CARROSSEL === */
+.carrossel-controles {
+  /* LAYOUT: Controles centralizados */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  padding: 0 var(--spacing-md);
+}
+
+.carrossel-btn {
+  /* BOTÃO: Base para navegação */
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-electric-blue);
+  color: var(--color-tech-white);
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.carrossel-btn:hover:not(:disabled) {
+  /* HOVER: Feedback */
+  background: var(--color-deep-blue);
+  transform: scale(1.1);
+}
+
+.carrossel-btn:disabled {
+  /* DISABLED: Estado inativo */
+  background: var(--color-mid-gray);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.5;
+}
+
+/* === INDICADORES === */
+.carrossel-indicadores {
+  /* CONTAINER: Dots de navegação */
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.indicador {
+  /* DOT: Indicador individual */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-mid-gray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.5;
+}
+
+.indicador.ativo {
+  /* ATIVO: Destaque */
+  background: var(--color-electric-blue);
+  transform: scale(1.3);
+  opacity: 1;
+}
+
+.indicador:hover {
+  /* HOVER: Feedback */
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+/* === BARRA DE PROGRESSO === */
+.carrossel-progresso {
+  /* CONTAINER: Barra de progresso */
+  width: 100%;
+  height: 4px;
+  background: var(--color-light-gray);
+  border-radius: 2px;
+  margin-top: var(--spacing-md);
+  overflow: hidden;
+}
+
+.progresso-fill {
+  /* FILL: Preenchimento animado */
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--color-electric-blue) 0%, 
+    var(--color-data-green) 100%
+  );
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* === SEÇÃO DESENVOLVIMENTO === */
+.processo-timeline {
+  /* TIMELINE: Linha do tempo */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.timeline-item {
+  /* ITEM: Etapa do processo */
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.timeline-marker {
+  /* MARCADOR: Número da etapa */
+  width: 40px;
+  height: 40px;
+  background: var(--color-electric-blue);
+  color: var(--color-tech-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.timeline-content {
+  /* CONTEÚDO: Descrição da etapa */
+  flex: 1;
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-electric-blue);
+}
+
+.timeline-content h3 {
+  /* TÍTULO: Etapa */
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.timeline-content p {
+  /* DESCRIÇÃO: Detalhes */
+  color: var(--color-graphite);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* === DESAFIOS === */
+.desafios-box {
+  /* BOX: Destaque para desafios */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-innovation-purple);
+}
+
+.desafios-box h3 {
+  /* TÍTULO: Desafios */
+  color: var(--color-deep-blue);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.desafios-grid {
+  /* GRID: Cards de desafios */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.desafio-item {
+  /* ITEM: Desafio individual */
   background: var(--color-tech-white);
+  padding: var(--spacing-sm);
   border-radius: var(--border-radius-small);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.skill-name {
-  font-weight: 500;
-  color: var(--color-deep-blue);
+.desafio-item h4 {
+  /* TÍTULO: Nome do desafio */
+  color: var(--color-innovation-purple);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-xs);
 }
 
-.skill-level {
-  font-size: 0.85rem;
-  color: var(--color-mid-gray);
-  font-weight: 500;
+.desafio-item p {
+  /* DESCRIÇÃO: Explicação */
+  color: var(--color-graphite);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
 }
 
-/* === FOOTER PESSOAL === */
-.personal-footer {
-  background: linear-gradient(135deg, 
-    var(--color-deep-blue) 0%, 
-    var(--color-graphite) 100%
-  );
-  color: var(--color-tech-white);
-  padding: var(--spacing-xl) 0;
-  text-align: center;
+/* === SEÇÃO LIMITAÇÕES === */
+.consideracoes-content {
+  /* CONTEÚDO: Layout de considerações */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.dados-info {
+  /* INFO: Fonte dos dados */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
   border-radius: var(--border-radius);
 }
 
-.footer-message {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+.dados-info h3 {
+  /* TÍTULO: Seção */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
 }
 
-.footer-message h3 {
-  color: var(--color-tech-white);
-  font-size: 2rem;
+.fontes-list {
+  /* LISTA: Fontes científicas */
+  margin-top: var(--spacing-md);
+}
+
+.fonte-item {
+  /* ITEM: Fonte individual */
+  padding: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border-left: 3px solid var(--color-data-green);
+  font-size: 0.9rem;
+}
+
+.futuras-melhorias {
+  /* MELHORIAS: Evoluções possíveis */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.futuras-melhorias h3 {
+  /* TÍTULO: Futuro */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.futuras-melhorias ul {
+  /* LISTA: Ideias futuras */
+  margin: 0;
+  padding-left: var(--spacing-md);
+}
+
+.futuras-melhorias li {
+  /* ITEM: Melhoria específica */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  line-height: 1.4;
+}
+
+/* === FOOTER PROJETO === */
+.projeto-footer {
+  /* FOOTER: Informações finais */
+  border-top: 2px solid var(--color-light-gray);
+  padding-top: var(--spacing-lg);
+}
+
+.footer-content {
+  /* CONTEÚDO: Layout do footer */
+  text-align: center;
+}
+
+.footer-content h3 {
+  /* TÍTULO: Footer */
+  color: var(--color-deep-blue);
   margin-bottom: var(--spacing-md);
 }
 
-.footer-message p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
-  opacity: 0.95;
+.projeto-meta {
+  /* META: Informações do projeto */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
 }
 
-.footer-links {
-  /* LINKS: Botões de contato */
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-}
-
-.footer-link {
-  /* LINK: Estilo de botão */
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-tech-white);
-  padding: var(--spacing-sm) var(--spacing-md);
+.meta-item {
+  /* ITEM: Informação específica */
+  padding: var(--spacing-xs);
+  background: var(--color-light-gray);
   border-radius: var(--border-radius-small);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.footer-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-  color: var(--color-tech-white);
-  text-decoration: none;
-}
-
-.footer-signature {
-  /* ASSINATURA: Informações finais */
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: var(--spacing-md);
   font-size: 0.9rem;
-  opacity: 0.8;
+}
+
+.meta-item strong {
+  /* LABEL: Categoria */
+  color: var(--color-electric-blue);
+}
+
+.tecnologias-footer {
+  /* TECNOLOGIAS: Stack resumida */
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+}
+
+.tecnologias-footer p {
+  /* TEXTO: Informação técnica */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  font-size: 0.9rem;
+}
+
+.tecnologias-footer p:last-child {
+  margin-bottom: 0;
 }
 
 /* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .experiencia-card {
+    /* MOBILE: Cards maiores para melhor legibilidade */
+    flex: 0 0 85vw;
+    min-width: 260px;
+    padding: var(--spacing-sm);
+  }
+  
+  .experiencia-titulo {
+    font-size: 1.1rem;
+  }
+  
+  .carrossel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  
+  .carrossel-controles {
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (min-width: 769px) {
+  .experiencia-card {
+    /* TABLET+: Cards menores, mais por tela */
+    flex: 0 0 60vw;
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .experiencia-card {
+    /* DESKTOP: Optimal sizing */
+    flex: 0 0 45vw;
+    max-width: 400px;
+  }
+  
+  .carrossel-track {
+    /* DESKTOP: Mais espaço entre cards */
+    gap: var(--spacing-lg);
+  }
+}
+
 @media (max-width: 1024px) {
-  .profile-info {
-    grid-template-columns: 1fr;
-    text-align: center;
+  .tech-grid {
+    grid-template-columns: 1fr 1fr;
   }
   
-  .profile-actions {
-    align-items: center;
-  }
-  
-  .contact-info {
-    text-align: center;
-  }
-  
-  .projeto-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .desafio-detalhes {
+  .consideracoes-content {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-text h1 {
-    font-size: 2.5rem;
+  .projeto-section .content-grid {
+    grid-template-columns: 1fr;
   }
   
-  .jornada-timeline {
-    padding-left: var(--spacing-lg);
+  .tech-grid {
+    grid-template-columns: 1fr;
   }
   
-  .jornada-timeline::before {
-    left: 15px;
+  .risk-types {
+    grid-template-columns: 1fr;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    text-align: center;
   }
   
   .timeline-marker {
-    left: -22px;
-    width: 30px;
-    height: 30px;
+    margin: 0 auto var(--spacing-sm) auto;
   }
   
-  .timeline-icon {
-    font-size: 1rem;
-  }
-  
-  .aprendizados-grid,
-  .competencias-grid {
+  .desafios-grid {
     grid-template-columns: 1fr;
   }
   
-  .skills-roadmap {
+  .projeto-meta {
     grid-template-columns: 1fr;
   }
   
-  .contact-final {
+  .score-item {
     flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-links {
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
+    gap: var(--spacing-xs);
   }
 }
 
 @media (max-width: 480px) {
-  .profile-text h1 {
-    font-size: 2rem;
-  }
-  
-  .meta-item {
-    flex-basis: 100%;
+  .stats-box {
     text-align: center;
   }
   
-  .contact-buttons {
+  .tech-item {
     flex-direction: column;
-    width: 100%;
+    text-align: center;
   }
   
-  .stats-projeto {
-    grid-template-columns: 1fr;
-  }
-  
-  .timeline-content {
-    padding: var(--spacing-md);
-  }
-  
-  .desafio-principal {
-    padding: var(--spacing-md);
-  }
-  
-  .footer-message {
-    padding: 0 var(--spacing-sm);
+  .tech-icon {
+    margin: 0 auto var(--spacing-xs) auto;
   }
 }
-
-/* === ANIMAÇÕES ESPECIAIS === */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.timeline-item {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.timeline-item:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.timeline-item:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-/* QUESTÃO FINAL: Por que animation-delay escalonado? */
-/* RESPOSTA: Cria efeito cascata que guia o olhar pela timeline sequencialmente */
