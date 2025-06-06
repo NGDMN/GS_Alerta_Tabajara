@@ -37,14 +37,14 @@ function Header() {
               to="/Monitoramento" 
               className={`nav-link ${isActiveLink('/Monitoramento') ? 'active' : ''}`}
             >
-              📊 Previsões
+              📊 Monitoramento
             </Link>
             
             <Link 
-              to="/Orientações" 
+              to="/Orientacoes" 
               className={`nav-link ${isActiveLink('/Orientacoes') ? 'active' : ''}`}
             >
-              🏥 Abrigos
+              🏥 Orientações
             </Link>
             
             <Link 
