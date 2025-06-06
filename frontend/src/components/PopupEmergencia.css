@@ -1,4 +1,4 @@
-/* src/components/PopupEmergencia.css */
+/* src/components/PopupEmergencia.css - VERSÃO CORRIGIDA GSX */
 
 /* ===== OVERLAY BLOQUEADOR ===== */
 .popup-overlay {
@@ -47,7 +47,7 @@
     var(--alert-vermelho) 0%, 
     color-mix(in srgb, var(--alert-vermelho) 80%, black) 100%
   );
-  color: white;
+  color: var(--color-tech-white);
   padding: var(--spacing-md);
   display: flex;
   align-items: center;
@@ -123,7 +123,7 @@
   height: 50px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
+  border: 2px solid var(--color-tech-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,7 +230,7 @@
   height: 20px;
   border: 2px solid var(--color-mid-gray);
   border-radius: 4px;
-  background: white;
+  background: var(--color-tech-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,7 +246,7 @@
 
 .checkbox-container input:checked + .checkmark::after {
   content: '✓';
-  color: white;
+  color: var(--color-tech-white);
   font-weight: bold;
   font-size: 14px;
 }
@@ -296,7 +296,7 @@
 
 .btn-confirmar {
   background: var(--alert-vermelho);
-  color: white;
+  color: var(--color-tech-white);
   min-width: 200px;
 }
 
@@ -307,7 +307,7 @@
 
 .btn-orientacoes {
   background: var(--color-electric-blue);
-  color: white;
+  color: var(--color-tech-white);
   flex: 1;
 }
 
@@ -318,7 +318,7 @@
 
 .btn-fechar {
   background: var(--color-mid-gray);
-  color: white;
+  color: var(--color-tech-white);
   min-width: 120px;
 }
 

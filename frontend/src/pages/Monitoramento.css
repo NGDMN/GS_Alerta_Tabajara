@@ -1,4 +1,4 @@
-/* src/pages/Monitoramento.css */
+/* src/pages/Monitoramento.css - VERSÃO FINAL CORRIGIDA GSX */
 
 .monitoramento {
   /* ANIMAÇÃO: Herda page-enter do App.css */
@@ -83,7 +83,7 @@
 }
 
 .demo-button {
-  /* BOTÃO: Destaque especial */
+  /* BOTÃO: Destaque especial - CORRIGIDO */
   background: linear-gradient(135deg, 
     var(--alert-vermelho) 0%, 
     color-mix(in srgb, var(--alert-vermelho) 80%, black) 100%
@@ -92,13 +92,17 @@
   padding: var(--spacing-sm) var(--spacing-md);
   font-weight: 600;
   font-size: 1rem;
-  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 12px var(--alert-vermelho-bg);
   animation: pulse-demo 3s infinite;
+  color: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .demo-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  box-shadow: 0 6px 20px var(--alert-vermelho-bg);
   background: linear-gradient(135deg, 
     color-mix(in srgb, var(--alert-vermelho) 90%, white) 0%, 
     var(--alert-vermelho) 100%
@@ -115,7 +119,7 @@
 
 @keyframes pulse-demo {
   0%, 100% { 
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 4px 12px var(--alert-vermelho-bg);
   }
   50% { 
     box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6);
@@ -208,7 +212,7 @@
   box-shadow: var(--shadow-strong);
 }
 
-/* CORES POR NÍVEL DE ALERTA */
+/* CORES POR NÍVEL DE ALERTA - CORRIGIDAS */
 .alerta-card.alert-verde {
   border-color: var(--alert-verde);
   color: var(--alert-verde);
@@ -232,7 +236,7 @@
 
 @keyframes pulse-red {
   0%, 100% { 
-    box-shadow: 0 0 0 rgba(220, 38, 38, 0.3);
+    box-shadow: 0 0 0 var(--alert-vermelho-bg);
   }
   50% { 
     box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
@@ -345,7 +349,7 @@
   box-shadow: var(--shadow-strong);
 }
 
-/* CORES POR NÍVEL DE RISCO */
+/* CORES POR NÍVEL DE RISCO - CORRIGIDAS */
 .estado-card.risco-verde {
   border-color: var(--alert-verde);
   color: var(--alert-verde);
@@ -470,6 +474,12 @@
   color: var(--color-tech-white);
 }
 
+/* CORES DOS MINI BADGES - CORRIGIDAS */
+.risco-nivel.nivel-verde { background: var(--alert-verde); }
+.risco-nivel.nivel-amarelo { background: var(--alert-amarelo); }
+.risco-nivel.nivel-laranja { background: var(--alert-laranja); }
+.risco-nivel.nivel-vermelho { background: var(--alert-vermelho); }
+
 /* === EMERGÊNCIA DOMINANTE === */
 .emergencia-dominante {
   /* DESTAQUE: Emergência principal */
@@ -477,7 +487,7 @@
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-sm);
-  background: rgba(220, 38, 38, 0.1);
+  background: var(--alert-vermelho-bg);
   border-radius: var(--border-radius-small);
   margin-bottom: var(--spacing-md);
   border-left: 4px solid var(--alert-vermelho);
@@ -521,6 +531,9 @@
   /* CARD: Análise específica */
   padding: var(--spacing-lg);
   border-left: 4px solid var(--color-electric-blue);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
 }
 
 .analytics-card h3 {

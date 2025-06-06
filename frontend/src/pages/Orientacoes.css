@@ -1,4 +1,4 @@
-/* src/pages/Orientacoes.css */
+/* src/pages/Orientacoes.css - VERSÃO CORRIGIDA GSX */
 
 .orientacoes {
   /* FUNDAÇÃO: Herda animações do sistema GSX */
@@ -26,7 +26,7 @@
   padding: var(--spacing-xl);
   border-radius: var(--border-radius);
   margin-bottom: var(--spacing-xl);
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 8px 32px var(--alert-vermelho-bg);
 }
 
 .emergency-header h1 {
@@ -300,12 +300,12 @@
 /* TIPOS DE CONTATO */
 .contato-card.tipo-emergencia {
   border-color: var(--alert-vermelho);
-  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(220, 38, 38, 0.05) 100%);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, var(--alert-vermelho-bg) 100%);
 }
 
 .contato-card.tipo-coordenacao {
   border-color: var(--alert-laranja);
-  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(239, 68, 68, 0.05) 100%);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, var(--alert-laranja-bg) 100%);
 }
 
 .contato-card.tipo-medico {
@@ -315,7 +315,7 @@
 
 .contato-card.tipo-resgate {
   border-color: var(--alert-amarelo);
-  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(245, 158, 11, 0.05) 100%);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, var(--alert-amarelo-bg) 100%);
 }
 
 .contato-card.tipo-seguranca {
