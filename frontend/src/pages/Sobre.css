@@ -1,0 +1,570 @@
+/* src/pages/Sobre.css */
+
+.sobre {
+  /* ANIMAÇÃO: Herda page-enter do App.css */
+  /* SPACING: Seções bem separadas */
+}
+
+.sobre section {
+  /* ESPAÇAMENTO: Entre seções principais */
+  margin-bottom: var(--spacing-xl);
+}
+
+.sobre section:last-child {
+  /* ÚLTIMA SEÇÃO: Sem margin bottom */
+  margin-bottom: 0;
+}
+
+/* === SEÇÃO PROJETO === */
+.projeto-section .content-grid {
+  /* LAYOUT: Texto + estatísticas lado a lado */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+.text-content h3 {
+  /* SUBTÍTULOS: Destaque sem competir com h2 */
+  color: var(--color-electric-blue);
+  font-size: 1.25rem;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.text-content h3:first-child {
+  /* PRIMEIRO H3: Sem margin top */
+  margin-top: 0;
+}
+
+.stats-box {
+  /* CAIXA: Estatísticas destacadas */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-electric-blue);
+}
+
+.stats-box h3 {
+  /* TÍTULO: Menor que seção principal */
+  font-size: 1.1rem;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.stats-box .stat-item {
+  /* ITEM: Número + label */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs);
+}
+
+.stats-box .stat-item:last-child {
+  margin-bottom: 0;
+}
+
+.stats-box .stat-number {
+  /* NÚMERO: Grande e chamativo */
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.stats-box .stat-label {
+  /* LABEL: Explicativo */
+  font-size: 0.9rem;
+  color: var(--color-mid-gray);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* === SEÇÃO TECNOLOGIAS === */
+.tech-grid {
+  /* GRID: 3 colunas responsivas */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.tech-category {
+  /* CATEGORIA: Container para cada grupo */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-top: 4px solid var(--color-innovation-purple);
+}
+
+.tech-category h3 {
+  /* TÍTULO: Categoria tecnológica */
+  color: var(--color-deep-blue);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.tech-list {
+  /* LISTA: Tecnologias da categoria */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.tech-item {
+  /* ITEM: Tecnologia individual */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.tech-item:hover {
+  /* HOVER: Elevação sutil */
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-light);
+}
+
+.tech-icon {
+  /* ÍCONE: Emoji grande */
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.tech-info {
+  /* INFO: Nome + descrição */
+  flex: 1;
+}
+
+.tech-info strong {
+  /* NOME: Tecnologia */
+  color: var(--color-deep-blue);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tech-info p {
+  /* DESCRIÇÃO: Função da tecnologia */
+  color: var(--color-mid-gray);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* === SEÇÃO METODOLOGIA === */
+.metodologia-content {
+  /* CONTEÚDO: Seções organizadas */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.algoritmo-overview {
+  /* OVERVIEW: Introdução da metodologia */
+  text-align: center;
+  padding: var(--spacing-md);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+}
+
+.algoritmo-overview h3 {
+  /* TÍTULO: Destaque */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.risk-types {
+  /* TIPOS: Grid de riscos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.risk-card {
+  /* CARD: Tipo de risco individual */
+  background: var(--color-tech-white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-light-gray);
+  transition: all 0.2s ease;
+}
+
+.risk-card:hover {
+  /* HOVER: Destaque */
+  border-color: var(--color-electric-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+}
+
+.risk-card h4 {
+  /* TÍTULO: Tipo de risco */
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-display);
+}
+
+.risk-card ul {
+  /* LISTA: Critérios */
+  margin: 0;
+  padding-left: var(--spacing-md);
+}
+
+.risk-card li {
+  /* ITEM: Critério específico */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  line-height: 1.4;
+}
+
+.risk-card li strong {
+  /* PARÂMETRO: Nome do critério */
+  color: var(--color-electric-blue);
+}
+
+/* === SISTEMA DE PONTUAÇÃO === */
+.scoring-system {
+  /* SISTEMA: Explicação das cores */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.scoring-system h3 {
+  /* TÍTULO: Centralizado */
+  text-align: center;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.score-explanation {
+  /* EXPLICAÇÃO: Lista de níveis */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.score-item {
+  /* ITEM: Faixa + nível */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+}
+
+.score-range {
+  /* FAIXA: Pontuação */
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  font-family: var(--font-display);
+  min-width: 100px;
+  text-align: center;
+  color: var(--color-tech-white);
+}
+
+.score-range.verde { background: var(--alert-verde); }
+.score-range.amarelo { background: var(--alert-amarelo); }
+.score-range.laranja { background: var(--alert-laranja); }
+.score-range.vermelho { background: var(--alert-vermelho); }
+
+.score-level {
+  /* NÍVEL: Descrição */
+  font-weight: 500;
+  color: var(--color-graphite);
+}
+
+/* === SEÇÃO DESENVOLVIMENTO === */
+.processo-timeline {
+  /* TIMELINE: Linha do tempo */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.timeline-item {
+  /* ITEM: Etapa do processo */
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.timeline-marker {
+  /* MARCADOR: Número da etapa */
+  width: 40px;
+  height: 40px;
+  background: var(--color-electric-blue);
+  color: var(--color-tech-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.timeline-content {
+  /* CONTEÚDO: Descrição da etapa */
+  flex: 1;
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-electric-blue);
+}
+
+.timeline-content h3 {
+  /* TÍTULO: Etapa */
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.timeline-content p {
+  /* DESCRIÇÃO: Detalhes */
+  color: var(--color-graphite);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* === DESAFIOS === */
+.desafios-box {
+  /* BOX: Destaque para desafios */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-innovation-purple);
+}
+
+.desafios-box h3 {
+  /* TÍTULO: Desafios */
+  color: var(--color-deep-blue);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.desafios-grid {
+  /* GRID: Cards de desafios */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.desafio-item {
+  /* ITEM: Desafio individual */
+  background: var(--color-tech-white);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.desafio-item h4 {
+  /* TÍTULO: Nome do desafio */
+  color: var(--color-innovation-purple);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.desafio-item p {
+  /* DESCRIÇÃO: Explicação */
+  color: var(--color-graphite);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* === SEÇÃO LIMITAÇÕES === */
+.consideracoes-content {
+  /* CONTEÚDO: Layout de considerações */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.dados-info {
+  /* INFO: Fonte dos dados */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.dados-info h3 {
+  /* TÍTULO: Seção */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.fontes-list {
+  /* LISTA: Fontes científicas */
+  margin-top: var(--spacing-md);
+}
+
+.fonte-item {
+  /* ITEM: Fonte individual */
+  padding: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border-left: 3px solid var(--color-data-green);
+  font-size: 0.9rem;
+}
+
+.futuras-melhorias {
+  /* MELHORIAS: Evoluções possíveis */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.futuras-melhorias h3 {
+  /* TÍTULO: Futuro */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.futuras-melhorias ul {
+  /* LISTA: Ideias futuras */
+  margin: 0;
+  padding-left: var(--spacing-md);
+}
+
+.futuras-melhorias li {
+  /* ITEM: Melhoria específica */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  line-height: 1.4;
+}
+
+/* === FOOTER PROJETO === */
+.projeto-footer {
+  /* FOOTER: Informações finais */
+  border-top: 2px solid var(--color-light-gray);
+  padding-top: var(--spacing-lg);
+}
+
+.footer-content {
+  /* CONTEÚDO: Layout do footer */
+  text-align: center;
+}
+
+.footer-content h3 {
+  /* TÍTULO: Footer */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.projeto-meta {
+  /* META: Informações do projeto */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.meta-item {
+  /* ITEM: Informação específica */
+  padding: var(--spacing-xs);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+  font-size: 0.9rem;
+}
+
+.meta-item strong {
+  /* LABEL: Categoria */
+  color: var(--color-electric-blue);
+}
+
+.tecnologias-footer {
+  /* TECNOLOGIAS: Stack resumida */
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+}
+
+.tecnologias-footer p {
+  /* TEXTO: Informação técnica */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  font-size: 0.9rem;
+}
+
+.tecnologias-footer p:last-child {
+  margin-bottom: 0;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 1024px) {
+  .tech-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .consideracoes-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .projeto-section .content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .risk-types {
+    grid-template-columns: 1fr;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .timeline-marker {
+    margin: 0 auto var(--spacing-sm) auto;
+  }
+  
+  .desafios-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .projeto-meta {
+    grid-template-columns: 1fr;
+  }
+  
+  .score-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-box {
+    text-align: center;
+  }
+  
+  .tech-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .tech-icon {
+    margin: 0 auto var(--spacing-xs) auto;
+  }
+}

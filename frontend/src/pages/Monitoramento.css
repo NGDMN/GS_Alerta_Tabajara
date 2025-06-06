@@ -1,0 +1,777 @@
+/* src/pages/Monitoramento.css */
+
+.monitoramento {
+  /* ANIMAÇÃO: Herda page-enter do App.css */
+  min-height: 100vh;
+}
+
+.monitoramento section {
+  /* ESPAÇAMENTO: Entre seções do dashboard */
+  margin-bottom: var(--spacing-xl);
+}
+
+.monitoramento section:last-child {
+  margin-bottom: 0;
+}
+
+/* === HEADER DO DASHBOARD === */
+.dashboard-header {
+  /* LAYOUT: Seção de topo */
+  background: linear-gradient(135deg, 
+    var(--color-deep-blue) 0%, 
+    var(--color-electric-blue) 100%
+  );
+  color: var(--color-tech-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-xl);
+}
+
+.header-content {
+  /* FLEXBOX: Info + controles */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.header-info h1 {
+  /* TÍTULO: Branco + grande */
+  color: var(--color-tech-white);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.header-info p {
+  /* SUBTÍTULO: Mais claro */
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.status-resumo {
+  /* STATUS: Info operacional */
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.sistema-status {
+  /* STATUS: Indicador online */
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--color-data-green);
+  border-radius: var(--border-radius-small);
+  font-size: 0.9rem;
+}
+
+.ultima-atualizacao {
+  /* TIMESTAMP: Última atualização */
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* === CONTROLES DE DEMO === */
+.demo-controls {
+  /* LAYOUT: Botão + hint */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-xs);
+}
+
+.demo-button {
+  /* BOTÃO: Destaque especial */
+  background: linear-gradient(135deg, 
+    var(--alert-vermelho) 0%, 
+    color-mix(in srgb, var(--alert-vermelho) 80%, black) 100%
+  );
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  animation: pulse-demo 3s infinite;
+}
+
+.demo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--alert-vermelho) 90%, white) 0%, 
+    var(--alert-vermelho) 100%
+  );
+}
+
+.demo-hint {
+  /* HINT: Texto explicativo */
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-align: right;
+  max-width: 150px;
+}
+
+@keyframes pulse-demo {
+  0%, 100% { 
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  }
+  50% { 
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6);
+  }
+}
+
+/* === ESTATÍSTICAS DASHBOARD === */
+.stats-dashboard {
+  /* GRID: 4 cards de estatísticas */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.stat-card {
+  /* CARD: Estatística individual */
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  /* HOVER: Destaque sutil */
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.stat-card .stat-number {
+  /* NÚMERO: Grande e destacado */
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-data-green);
+  font-family: var(--font-display);
+  line-height: 1;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-card .stat-label {
+  /* LABEL: Descrição */
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* === ALERTAS CRÍTICOS === */
+.alertas-criticos h2 {
+  /* TÍTULO: Urgente */
+  color: var(--alert-vermelho);
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.alertas-grid {
+  /* GRID: Cards de alertas */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.alerta-card {
+  /* CARD: Base para alertas */
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 2px solid;
+  background: var(--color-tech-white);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.alerta-card::before {
+  /* BARRA: Indicador visual no topo */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: currentColor;
+}
+
+.alerta-card:hover {
+  /* HOVER: Elevação */
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* CORES POR NÍVEL DE ALERTA */
+.alerta-card.alert-verde {
+  border-color: var(--alert-verde);
+  color: var(--alert-verde);
+}
+
+.alerta-card.alert-amarelo {
+  border-color: var(--alert-amarelo);
+  color: var(--alert-amarelo);
+}
+
+.alerta-card.alert-laranja {
+  border-color: var(--alert-laranja);
+  color: var(--alert-laranja);
+}
+
+.alerta-card.alert-vermelho {
+  border-color: var(--alert-vermelho);
+  color: var(--alert-vermelho);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { 
+    box-shadow: 0 0 0 rgba(220, 38, 38, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+  }
+}
+
+.alerta-header {
+  /* HEADER: Ícone + meta info */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.alerta-icon {
+  /* ÍCONE: Emoji grande */
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.alerta-meta {
+  /* META: Estado + nível */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+.alerta-estado {
+  /* ESTADO: Nome */
+  font-weight: 600;
+  color: var(--color-deep-blue);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.alerta-nivel {
+  /* NÍVEL: Badge */
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-small);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: currentColor;
+  color: var(--color-tech-white);
+  margin-left: auto;
+}
+
+.alerta-card h3 {
+  /* TÍTULO: Tipo do alerta */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.25rem;
+}
+
+.alerta-card p {
+  /* DESCRIÇÃO: Resumo */
+  color: var(--color-mid-gray);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.alerta-actions {
+  /* AÇÕES: Botões */
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* === ESTADOS OVERVIEW === */
+.estados-overview h2 {
+  /* TÍTULO: Seção */
+  color: var(--color-deep-blue);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.estados-grid {
+  /* GRID: Estados */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.estado-card {
+  /* CARD: Estado individual */
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  border: 2px solid;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.estado-card::before {
+  /* BARRA: Indicador de risco */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.estado-card:hover {
+  /* HOVER: Interação */
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* CORES POR NÍVEL DE RISCO */
+.estado-card.risco-verde {
+  border-color: var(--alert-verde);
+  color: var(--alert-verde);
+}
+
+.estado-card.risco-amarelo {
+  border-color: var(--alert-amarelo);
+  color: var(--alert-amarelo);
+}
+
+.estado-card.risco-laranja {
+  border-color: var(--alert-laranja);
+  color: var(--alert-laranja);
+}
+
+.estado-card.risco-vermelho {
+  border-color: var(--alert-vermelho);
+  color: var(--alert-vermelho);
+  animation: pulse-red 2s infinite;
+}
+
+.estado-header {
+  /* HEADER: Estado + emoji */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.estado-header h3 {
+  /* SIGLA: Destaque */
+  font-size: 1.75rem;
+  color: var(--color-deep-blue);
+  margin: 0;
+  font-weight: 700;
+}
+
+.risco-emoji {
+  /* EMOJI: Status visual */
+  font-size: 2rem;
+}
+
+.estado-status {
+  /* STATUS: Info principal */
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-small);
+}
+
+.status-text {
+  /* TEXTO: Descrição */
+  color: var(--color-graphite);
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.nivel-badge {
+  /* BADGE: Nível */
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-tech-white);
+}
+
+.nivel-badge.nivel-verde { background: var(--alert-verde); }
+.nivel-badge.nivel-amarelo { background: var(--alert-amarelo); }
+.nivel-badge.nivel-laranja { background: var(--alert-laranja); }
+.nivel-badge.nivel-vermelho { background: var(--alert-vermelho); }
+
+/* === RISCOS DETALHES === */
+.riscos-detalhes {
+  /* LAYOUT: Lista de riscos */
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-small);
+}
+
+.risco-item {
+  /* ITEM: Risco individual */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.risco-item:last-child {
+  margin-bottom: 0;
+}
+
+.risco-icon {
+  /* ÍCONE: Emoji */
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+.risco-info {
+  /* INFO: Tipo + nível */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.risco-tipo {
+  /* TIPO: Nome */
+  color: var(--color-graphite);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.risco-nivel {
+  /* NÍVEL: Mini badge */
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-tech-white);
+}
+
+/* === EMERGÊNCIA DOMINANTE === */
+.emergencia-dominante {
+  /* DESTAQUE: Emergência principal */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: var(--border-radius-small);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid var(--alert-vermelho);
+}
+
+.emergencia-icon {
+  /* ÍCONE: Emergência */
+  font-size: 1.25rem;
+}
+
+.emergencia-texto {
+  /* TEXTO: Descrição */
+  color: var(--alert-vermelho);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.estado-actions {
+  /* AÇÕES: Botões do card */
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* === ANALYTICS DASHBOARD === */
+.dashboard-analytics h2 {
+  /* TÍTULO: Seção de análise */
+  color: var(--color-deep-blue);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.analytics-grid {
+  /* GRID: Cards analíticos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.analytics-card {
+  /* CARD: Análise específica */
+  padding: var(--spacing-lg);
+  border-left: 4px solid var(--color-electric-blue);
+}
+
+.analytics-card h3 {
+  /* TÍTULO: Análise */
+  color: var(--color-deep-blue);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+}
+
+/* === DISTRIBUIÇÃO CHART === */
+.distribuicao-chart {
+  /* CHART: Barras de distribuição */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.nivel-bar {
+  /* BAR: Item de distribuição */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.nivel-info {
+  /* INFO: Emoji + nome + count */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.nivel-emoji {
+  /* EMOJI: Visual */
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+.nivel-nome {
+  /* NOME: Tipo */
+  flex: 1;
+  font-weight: 500;
+  color: var(--color-graphite);
+}
+
+.nivel-count {
+  /* COUNT: Número */
+  font-weight: 600;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+}
+
+.nivel-progress {
+  /* PROGRESS: Barra visual */
+  height: 8px;
+  background: var(--color-light-gray);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  /* FILL: Preenchimento */
+  height: 100%;
+  transition: width 0.8s ease;
+  border-radius: 4px;
+}
+
+.progress-fill.nivel-verde { background: var(--alert-verde); }
+.progress-fill.nivel-amarelo { background: var(--alert-amarelo); }
+.progress-fill.nivel-laranja { background: var(--alert-laranja); }
+.progress-fill.nivel-vermelho { background: var(--alert-vermelho); }
+
+/* === TIPOS CHART === */
+.tipos-chart {
+  /* CHART: Grid de tipos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.tipo-stat {
+  /* STAT: Tipo individual */
+  text-align: center;
+  padding: var(--spacing-md);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+  transition: all 0.2s ease;
+}
+
+.tipo-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+}
+
+.tipo-header {
+  /* HEADER: Emoji + nome */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tipo-emoji {
+  /* EMOJI: Grande */
+  font-size: 2rem;
+}
+
+.tipo-nome {
+  /* NOME: Tipo de emergência */
+  font-weight: 600;
+  color: var(--color-deep-blue);
+  font-size: 0.9rem;
+}
+
+.tipo-count {
+  /* COUNT: Quantidade */
+  font-weight: 600;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+}
+
+/* === SISTEMA INFO === */
+.sistema-info {
+  /* INFO: Detalhes operacionais */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.sistema-status-detail {
+  /* DETAIL: Status completo */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.status-indicator {
+  /* INDICATOR: Online/offline */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.status-indicator.online .status-dot {
+  /* DOT: Verde pulsante */
+  width: 12px;
+  height: 12px;
+  background: var(--alert-verde);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-text {
+  /* TEXT: Status texto */
+  font-weight: 600;
+  color: var(--color-deep-blue);
+}
+
+.status-metrics {
+  /* METRICS: Informações adicionais */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+}
+
+.metric-item {
+  /* ITEM: Métrica individual */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metric-label {
+  /* LABEL: Nome da métrica */
+  color: var(--color-mid-gray);
+  font-size: 0.9rem;
+}
+
+.metric-value {
+  /* VALUE: Valor da métrica */
+  font-weight: 600;
+  color: var(--color-electric-blue);
+  font-size: 0.9rem;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 1024px) {
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .demo-controls {
+    align-items: center;
+  }
+  
+  .analytics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: var(--spacing-md);
+  }
+  
+  .header-info h1 {
+    font-size: 2rem;
+  }
+  
+  .stats-dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .alertas-grid,
+  .estados-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tipos-chart {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-dashboard {
+    grid-template-columns: 1fr;
+  }
+  
+  .alerta-actions,
+  .estado-actions {
+    flex-direction: column;
+  }
+  
+  .status-resumo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+}
+
+/* === ANIMAÇÕES === */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

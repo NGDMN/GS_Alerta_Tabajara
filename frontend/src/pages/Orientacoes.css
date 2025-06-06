@@ -1,0 +1,748 @@
+/* src/pages/Orientacoes.css */
+
+.orientacoes {
+  /* FUNDAÇÃO: Herda animações do sistema GSX */
+  min-height: 100vh;
+}
+
+.orientacoes section {
+  /* ESPAÇAMENTO: Seções bem separadas para leitura rápida */
+  margin-bottom: var(--spacing-xl);
+}
+
+.orientacoes section:last-child {
+  margin-bottom: 0;
+}
+
+/* === HEADER DE EMERGÊNCIA === */
+.emergency-header {
+  /* LAYOUT: Centralizado e impactante */
+  text-align: center;
+  background: linear-gradient(135deg, 
+    var(--alert-vermelho) 0%, 
+    color-mix(in srgb, var(--alert-vermelho) 80%, black) 100%
+  );
+  color: var(--color-tech-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+}
+
+.emergency-header h1 {
+  /* TÍTULO: Urgente e grande */
+  color: var(--color-tech-white);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.emergency-header p {
+  /* SUBTÍTULO: Oficial */
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: var(--spacing-lg);
+  font-weight: 500;
+}
+
+/* === SELETOR DE TIPOS === */
+.tipo-selector {
+  /* LAYOUT: Botões de tipos de emergência */
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.tipo-button {
+  /* BOTÃO: Base para tipos */
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-tech-white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-width: 180px;
+  justify-content: center;
+}
+
+.tipo-button:hover {
+  /* HOVER: Feedback visual */
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.tipo-button.active {
+  /* ATIVO: Destacado com cor específica */
+  background: var(--tipo-cor, var(--color-tech-white));
+  color: var(--color-deep-blue);
+  border-color: var(--tipo-cor, var(--color-tech-white));
+  font-weight: 700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.tipo-button span {
+  /* TEXTO: Nome do tipo */
+  font-size: 0.9rem;
+}
+
+/* === INSTRUÇÕES DETALHADAS === */
+.instrucoes-detalhadas {
+  /* SEÇÃO: Container principal */
+  margin-bottom: var(--spacing-xl);
+}
+
+.instrucoes-card {
+  /* CARD: Container das instruções */
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+  border: 3px solid var(--instrucao-cor, var(--color-mid-gray));
+}
+
+/* === HEADER DA INSTRUÇÃO === */
+.instrucao-header {
+  /* HEADER: Topo da instrução */
+  background: var(--instrucao-cor, var(--color-mid-gray));
+  color: var(--color-tech-white);
+  padding: var(--spacing-lg);
+}
+
+.titulo-emergencia h2 {
+  /* TÍTULO: Tipo de emergência */
+  color: var(--color-tech-white);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.urgencia-info {
+  /* INFO: Nível de urgência */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.urgencia-badge {
+  /* BADGE: Nível de urgência */
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-small);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.tempo-acao {
+  /* TEMPO: Janela de ação */
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+/* === FASES DE AÇÃO === */
+.fases-acao {
+  /* CONTAINER: Todas as fases */
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.fase-card {
+  /* CARD: Fase individual */
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  border-left: 6px solid var(--instrucao-cor, var(--color-mid-gray));
+  transition: all 0.2s ease;
+}
+
+.fase-card:hover {
+  /* HOVER: Destaque sutil */
+  transform: translateX(4px);
+  box-shadow: var(--shadow-light);
+}
+
+.fase-header {
+  /* HEADER: Número + info da fase */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.fase-numero {
+  /* NÚMERO: Indicador da fase */
+  width: 40px;
+  height: 40px;
+  background: var(--instrucao-cor, var(--color-mid-gray));
+  color: var(--color-tech-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.fase-info h3 {
+  /* TÍTULO: Nome da fase */
+  color: var(--color-deep-blue);
+  font-size: 1.5rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.fase-tempo {
+  /* TEMPO: Duração da fase */
+  color: var(--color-mid-gray);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* === AÇÕES === */
+.acoes-lista {
+  /* LISTA: Ações da fase */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.acao-item {
+  /* ITEM: Ação individual */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.acao-bullet {
+  /* BULLET: Marcador */
+  color: var(--instrucao-cor, var(--color-mid-gray));
+  font-weight: 700;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.acao-texto {
+  /* TEXTO: Descrição da ação */
+  color: var(--color-graphite);
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* === CONTATOS DE EMERGÊNCIA === */
+.contatos-emergencia {
+  /* SEÇÃO: Contatos importantes */
+  background: var(--color-light-gray);
+  padding: var(--spacing-lg);
+  border-top: 3px solid var(--instrucao-cor, var(--color-mid-gray));
+}
+
+.contatos-emergencia h3 {
+  /* TÍTULO: Seção de contatos */
+  color: var(--color-deep-blue);
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.contatos-grid {
+  /* GRID: Cards de contatos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.contato-card {
+  /* CARD: Contato individual - AGORA CLICÁVEL */
+  background: var(--color-tech-white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-small);
+  text-align: center;
+  border: 2px solid;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+}
+
+.contato-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+  text-decoration: none;
+}
+
+.contato-card:active {
+  transform: translateY(-1px);
+}
+
+/* TIPOS DE CONTATO */
+.contato-card.tipo-emergencia {
+  border-color: var(--alert-vermelho);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(220, 38, 38, 0.05) 100%);
+}
+
+.contato-card.tipo-coordenacao {
+  border-color: var(--alert-laranja);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(239, 68, 68, 0.05) 100%);
+}
+
+.contato-card.tipo-medico {
+  border-color: var(--color-electric-blue);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(30, 58, 138, 0.05) 100%);
+}
+
+.contato-card.tipo-resgate {
+  border-color: var(--alert-amarelo);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(245, 158, 11, 0.05) 100%);
+}
+
+.contato-card.tipo-seguranca {
+  border-color: var(--color-graphite);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(31, 41, 55, 0.05) 100%);
+}
+
+.contato-card.tipo-maritimo {
+  border-color: var(--color-innovation-purple);
+  background: linear-gradient(135deg, var(--color-tech-white) 0%, rgba(99, 102, 241, 0.05) 100%);
+}
+
+.contato-nome {
+  /* NOME: Órgão responsável */
+  display: block;
+  font-weight: 600;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1rem;
+}
+
+.contato-numero {
+  /* NÚMERO: Telefone - AGORA COM ÍCONE */
+  display: block;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+  margin-bottom: var(--spacing-xs);
+}
+
+.contato-acao {
+  /* AÇÃO: Instrução para clicar */
+  font-size: 0.8rem;
+  color: var(--color-mid-gray);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* === SISTEMA DE ABRIGOS === */
+.sistema-abrigos .gsx-card {
+  /* CARD: Container dos abrigos */
+  border-left: 6px solid var(--color-electric-blue);
+}
+
+.sistema-abrigos h2 {
+  /* TÍTULO: Seção abrigos */
+  color: var(--color-deep-blue);
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* === SELETOR DE ESTADO === */
+.estado-selector {
+  /* SELETOR: Container */
+  margin: var(--spacing-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.estado-selector label {
+  /* LABEL: Título do seletor */
+  font-weight: 600;
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+}
+
+.estado-select {
+  /* SELECT: Dropdown de estados */
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--color-tech-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.estado-select:focus {
+  /* FOCUS: Destaque */
+  outline: none;
+  border-color: var(--color-electric-blue);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* === ABRIGO RECOMENDADO === */
+.abrigo-recomendado {
+  /* RECOMENDAÇÃO: Container principal */
+  background: var(--color-light-gray);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-data-green);
+  margin-top: var(--spacing-lg);
+}
+
+.abrigo-recomendado h3 {
+  /* TÍTULO: Abrigo recomendado */
+  color: var(--color-deep-blue);
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.abrigo-info {
+  /* INFO: Layout do abrigo */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.abrigo-detalhes h4 {
+  /* NOME: Nome do abrigo */
+  color: var(--color-deep-blue);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.abrigo-stats {
+  /* STATS: Estatísticas */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.stat-item {
+  /* ITEM: Estatística individual */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  font-size: 0.95rem;
+}
+
+.stat-item strong {
+  /* VALOR: Destaque da estatística */
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+}
+
+/* === AÇÃO DO ABRIGO === */
+.abrigo-acao {
+  /* AÇÃO: Container do botão */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.ir-abrigo-button {
+  /* BOTÃO: IR PARA ABRIGO */
+  background: linear-gradient(135deg, 
+    var(--color-data-green) 0%, 
+    color-mix(in srgb, var(--color-data-green) 80%, black) 100%
+  );
+  color: var(--color-tech-white);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+  min-width: 200px;
+}
+
+.ir-abrigo-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+}
+
+.ir-abrigo-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.abrigo-hint {
+  /* HINT: Texto explicativo */
+  color: var(--color-mid-gray);
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 200px;
+}
+
+/* === MAPA DE ESTADOS === */
+.mapa-estados .gsx-card {
+  border-left: 6px solid var(--color-innovation-purple);
+}
+
+.estados-mapa {
+  /* MAPA: Grid de estados */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.estado-mapa-item {
+  /* ITEM: Estado individual */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-small);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.estado-mapa-item:hover {
+  background: var(--color-tech-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+}
+
+.estado-mapa-item.selecionado {
+  border-color: var(--color-electric-blue);
+  background: var(--color-tech-white);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+.estado-sigla {
+  /* SIGLA: Estado */
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+}
+
+.estado-nome {
+  /* NOME: Nome completo */
+  font-weight: 500;
+  color: var(--color-deep-blue);
+  font-size: 0.9rem;
+}
+
+.abrigos-count {
+  /* COUNT: Número de abrigos */
+  font-size: 0.8rem;
+  color: var(--color-mid-gray);
+}
+
+/* === PREVENÇÃO === */
+.prevencao-dicas .gsx-card {
+  border-left: 6px solid var(--color-data-green);
+}
+
+.dicas-grid {
+  /* GRID: Grid de dicas */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.dica-item {
+  /* ITEM: Dica individual */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+  border-left: 4px solid var(--color-data-green);
+  transition: all 0.2s ease;
+}
+
+.dica-item:hover {
+  background: var(--color-tech-white);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-light);
+}
+
+.dica-numero {
+  /* NÚMERO: Indicador da dica */
+  width: 30px;
+  height: 30px;
+  background: var(--color-data-green);
+  color: var(--color-tech-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.dica-texto {
+  /* TEXTO: Conteúdo da dica */
+  color: var(--color-graphite);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* === FOOTER DE EMERGÊNCIA === */
+.emergency-footer {
+  /* FOOTER: Aviso importante com contraste melhorado */
+  background: linear-gradient(135deg, 
+    var(--color-deep-blue) 0%, 
+    var(--color-graphite) 100%
+  );
+  color: var(--color-tech-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius);
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-alert h3 {
+  /* TÍTULO: Aviso */
+  color: var(--color-tech-white);
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-alert p {
+  /* TEXTO: Explicação */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.95;
+}
+
+.emergency-numbers {
+  /* NÚMEROS: Contatos essenciais */
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.emergency-numbers span {
+  /* NÚMERO: Individual */
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.emergency-numbers strong {
+  /* DESTAQUE: Número em si */
+  color: var(--color-data-green);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 1024px) {
+  .abrigo-info {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .urgencia-info {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .emergency-header {
+    padding: var(--spacing-md);
+  }
+  
+  .emergency-header h1 {
+    font-size: 2rem;
+  }
+  
+  .tipo-selector {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tipo-button {
+    min-width: 250px;
+  }
+  
+  .fase-header {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .contatos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .estados-mapa {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .dicas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .emergency-numbers {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .tipo-button {
+    min-width: 100%;
+  }
+  
+  .estados-mapa {
+    grid-template-columns: 1fr;
+  }
+  
+  .fase-numero {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .acao-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-xs);
+  }
+}
