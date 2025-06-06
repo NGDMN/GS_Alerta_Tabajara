@@ -131,7 +131,7 @@
   gap: 0.5rem;
   padding: 0.25rem 0.75rem;
   border-radius: var(--border-radius-small);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-electric-blue);
 }
 
 .status-dot {

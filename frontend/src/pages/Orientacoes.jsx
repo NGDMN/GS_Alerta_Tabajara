@@ -300,10 +300,16 @@ function Orientacoes() {
               <h3>📞 Contatos de Emergência</h3>
               <div className="contatos-grid">
                 {instrucoesPorTipo[tipoSelecionado].contatos.map((contato, index) => (
-                  <div key={index} className={`contato-card tipo-${contato.tipo}`}>
+                  <a 
+                    key={index} 
+                    href={`tel:${contato.numero}`}
+                    className={`contato-card tipo-${contato.tipo}`}
+                    title={`Ligar para ${contato.nome} - ${contato.numero}`}
+                  >
                     <span className="contato-nome">{contato.nome}</span>
-                    <span className="contato-numero">{contato.numero}</span>
-                  </div>
+                    <span className="contato-numero">📞 {contato.numero}</span>
+                    <small className="contato-acao">Toque para ligar</small>
+                  </a>
                 ))}
               </div>
             </div>
@@ -420,8 +426,18 @@ function Orientacoes() {
               Bombeiros e autoridades locais.
             </p>
             <div className="emergency-numbers">
-              <span>🚨 Emergência: <strong>190/193/192</strong></span>
-              <span>🏛️ Defesa Civil: <strong>199</strong></span>
+              <a href="tel:190" className="emergency-link">
+                🚨 Emergência: <strong>190</strong>
+              </a>
+              <a href="tel:193" className="emergency-link">
+                🔥 Bombeiros: <strong>193</strong>
+              </a>
+              <a href="tel:192" className="emergency-link">
+                🚑 SAMU: <strong>192</strong>
+              </a>
+              <a href="tel:199" className="emergency-link">
+                🏛️ Defesa Civil: <strong>199</strong>
+              </a>
             </div>
           </div>
         </section>

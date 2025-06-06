@@ -54,41 +54,82 @@ function Monitoramento({ onSimularEmergencia }) {
     }
   };
 
-  // ===== FUNÇÃO: Simular emergência melhorada =====
+  // ===== FUNÇÃO: Simular emergência randomizada =====
   const simularEmergencia = async () => {
-    console.log('🚨 Simulando emergência para demonstração...');
+    console.log('🚨 Simulando emergência aleatória para demonstração...');
     
     try {
-      // Criar dados de emergência realistas
+      // TIPOS DE EMERGÊNCIA POSSÍVEIS
+      const tiposEmergencia = [
+        {
+          tipo: 'incendio',
+          estado: 'RJ',
+          titulo: '🔥 EMERGÊNCIA DE INCÊNDIO',
+          resumo: 'Condições críticas detectadas no Rio de Janeiro - Temperatura extrema + vento forte + baixa umidade',
+          instrucoes: [
+            'Mantenha-se longe de áreas com vegetação seca',
+            'Feche janelas e evite atividades ao ar livre', 
+            'Tenha um kit de emergência preparado',
+            'Siga orientações da Defesa Civil'
+          ],
+          contato: '193 - Corpo de Bombeiros'
+        },
+        {
+          tipo: 'enchente',
+          estado: 'SC',
+          titulo: '🌊 ALERTA DE ENCHENTE',
+          resumo: 'Chuvas intensas detectadas em Santa Catarina - Acúmulo crítico de precipitação nas últimas 24h',
+          instrucoes: [
+            'Evite áreas alagáveis e margem de rios',
+            'Não atravesse ruas alagadas',
+            'Mantenha documentos em local seguro',
+            'Desligue energia elétrica se necessário'
+          ],
+          contato: '199 - Defesa Civil'
+        },
+        {
+          tipo: 'tsunami',
+          estado: 'CE',
+          titulo: '🌊 ALERTA DE TSUNAMI',
+          resumo: 'Atividade sísmica significativa detectada no Oceano Atlântico - Possível formação de tsunami',
+          instrucoes: [
+            'EVACUAÇÃO IMEDIATA para áreas altas',
+            'Afaste-se da costa pelo menos 3km',
+            'Não retorne até liberação oficial',
+            'Procure abrigos de emergência'
+          ],
+          contato: '190 - Polícia Militar'
+        }
+      ];
+      
+      // RANDOMIZAR: Escolher tipo aleatório
+      const emergenciaAleatoria = tiposEmergencia[Math.floor(Math.random() * tiposEmergencia.length)];
+      
+      // CRIAR DADOS DE EMERGÊNCIA
       const emergenciaSimulada = {
         id: 'DEMO_' + Date.now(),
-        estado: 'RJ',
-        tipo_principal: 'incendio',
+        estado: emergenciaAleatoria.estado,
+        tipo_principal: emergenciaAleatoria.tipo,
         nivel: 'VERMELHO',
-        titulo: '🔥 EMERGÊNCIA DE INCÊNDIO',
-        resumo: 'Condições críticas detectadas no Rio de Janeiro - Temperatura extrema + vento forte + baixa umidade',
-        instrucoes: [
-          'Mantenha-se longe de áreas com vegetação seca',
-          'Feche janelas e evite atividades ao ar livre', 
-          'Tenha um kit de emergência preparado',
-          'Siga orientações da Defesa Civil'
-        ],
-        contato: '193 - Corpo de Bombeiros',
+        titulo: emergenciaAleatoria.titulo,
+        resumo: emergenciaAleatoria.resumo,
+        instrucoes: emergenciaAleatoria.instrucoes,
+        contato: emergenciaAleatoria.contato,
         timestamp: new Date().toISOString(),
-        icone: '🔥'
+        icone: emergenciaAleatoria.titulo.split(' ')[0] // Primeiro emoji
       };
       
-      // Atualizar estados locais para demonstração visual
+      // ATUALIZAR ESTADO LOCAL
       const estadosComEmergencia = dadosEstados.map(estado => {
-        if (estado.sigla === 'RJ') {
+        if (estado.sigla === emergenciaAleatoria.estado) {
           return {
             ...estado,
             risco_geral: 'VERMELHO',
-            risco_dominante: 'incendio',
-            resumo_status: 'EMERGÊNCIA: Incêndio crítico detectado',
+            risco_dominante: emergenciaAleatoria.tipo,
+            resumo_status: `EMERGÊNCIA: ${emergenciaAleatoria.tipo} crítico detectado`,
             niveis: {
               ...estado.niveis,
-              incendio: 'VERMELHO'
+              [emergenciaAleatoria.tipo]: 'VERMELHO'
             }
           };
         }
@@ -98,13 +139,13 @@ function Monitoramento({ onSimularEmergencia }) {
       setDadosEstados(estadosComEmergencia);
       setAlertasAtivos([emergenciaSimulada]);
       
-      // CHAMAR FUNÇÃO DO APP.JS PARA MOSTRAR POPUP
+      // MOSTRAR POPUP
       if (onSimularEmergencia) {
-        console.log('📤 Enviando emergência para App.js:', emergenciaSimulada);
+        console.log('📤 Enviando emergência aleatória:', emergenciaSimulada);
         onSimularEmergencia(emergenciaSimulada);
       } else {
         console.warn('⚠️ Função onSimularEmergencia não foi passada como prop!');
-        alert('🚨 EMERGÊNCIA SIMULADA!\nAlerta de incêndio crítico no RJ ativado para demonstração.');
+        alert(`🚨 EMERGÊNCIA SIMULADA!\n${emergenciaSimulada.titulo}\nEstado: ${emergenciaSimulada.estado}`);
       }
       
     } catch (error) {
@@ -195,12 +236,12 @@ function Monitoramento({ onSimularEmergencia }) {
               <button 
                 className="gsx-button gsx-button-primary demo-button"
                 onClick={simularEmergencia}
-                title="Simula emergência para demonstração do sistema"
+                title="Simula emergência aleatória para demonstração do sistema"
               >
-                🚨 Simular Emergência
+                🎲 Simular Emergência Aleatória
               </button>
               <small className="demo-hint">
-                Para demonstração do sistema de alertas
+                Clique para simular diferentes tipos de emergência
               </small>
             </div>
           </div>

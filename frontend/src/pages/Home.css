@@ -1,539 +1,570 @@
-/* src/pages/Home.css */
+/* src/pages/Sobre.css */
 
-.home {
-  /* ANIMAÇÃO: Entrada suave */
-  animation: fadeInUp 0.6s ease-out;
+.sobre {
+  /* ANIMAÇÃO: Herda page-enter do App.css */
+  /* SPACING: Seções bem separadas */
 }
 
-/* === HERO SECTION === */
-.hero-section {
-  /* BACKGROUND: Gradiente sutil */
-  background: linear-gradient(135deg, 
-    var(--color-tech-white) 0%, 
-    var(--color-light-gray) 100%
-  );
-  
-  /* LAYOUT: Centralizado */
-  text-align: center;
-  padding: var(--spacing-xl) 0;
+.sobre section {
+  /* ESPAÇAMENTO: Entre seções principais */
   margin-bottom: var(--spacing-xl);
-  border-radius: var(--border-radius);
-  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.hero-content h1 {
-  /* TÍTULO: Impactante */
-  font-size: 3rem;
-  color: var(--color-deep-blue);
-  margin-bottom: var(--spacing-sm);
-  font-weight: 700;
+.sobre section:last-child {
+  /* ÚLTIMA SEÇÃO: Sem margin bottom */
+  margin-bottom: 0;
 }
 
-.hero-content p {
-  /* SUBTÍTULO: Explicativo */
-  font-size: 1.3rem;
-  color: var(--color-mid-gray);
-  margin-bottom: var(--spacing-lg);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* === ESTATÍSTICAS RÁPIDAS === */
-.stats-quick {
-  /* LAYOUT: Grid horizontal */
-  display: flex;
-  justify-content: center;
+/* === SEÇÃO PROJETO === */
+.projeto-section .content-grid {
+  /* LAYOUT: Texto + estatísticas lado a lado */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
+  align-items: start;
 }
 
-.stat-item {
-  /* LAYOUT: Vertical */
+.text-content h3 {
+  /* SUBTÍTULOS: Destaque sem competir com h2 */
+  color: var(--color-electric-blue);
+  font-size: 1.25rem;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.text-content h3:first-child {
+  /* PRIMEIRO H3: Sem margin top */
+  margin-top: 0;
+}
+
+.stats-box {
+  /* CAIXA: Estatísticas destacadas */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-electric-blue);
+}
+
+.stats-box h3 {
+  /* TÍTULO: Menor que seção principal */
+  font-size: 1.1rem;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.stats-box .stat-item {
+  /* ITEM: Número + label */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-md);
-  background: var(--color-tech-white);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-light);
-  min-width: 120px;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs);
 }
 
-.stat-number {
+.stats-box .stat-item:last-child {
+  margin-bottom: 0;
+}
+
+.stats-box .stat-number {
   /* NÚMERO: Grande e chamativo */
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--color-electric-blue);
   font-family: var(--font-display);
   line-height: 1;
 }
 
-.stat-label {
-  /* LABEL: Pequeno e explicativo */
+.stats-box .stat-label {
+  /* LABEL: Explicativo */
   font-size: 0.9rem;
   color: var(--color-mid-gray);
   font-weight: 500;
   margin-top: 0.25rem;
-  text-align: center;
 }
 
-/* === ALERTAS CRÍTICOS === */
-.alertas-criticos {
-  /* SPACING: Seção destacada */
-  margin-bottom: var(--spacing-xl);
-}
-
-.alertas-criticos h2 {
-  /* TÍTULO: Urgente */
-  color: var(--alert-vermelho);
-  font-size: 1.75rem;
-  margin-bottom: var(--spacing-md);
-  font-weight: 600;
-}
-
-.alertas-grid {
-  /* GRID: Responsivo */
+/* === SEÇÃO TECNOLOGIAS === */
+.tech-grid {
+  /* GRID: 3 colunas responsivas */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-md);
-}
-
-.alerta-card {
-  /* CARD: Base para alertas */
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius);
-  border: 2px solid;
-  background: var(--color-tech-white);
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.alerta-card::before {
-  /* BARRA: Indicador visual no topo */
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: currentColor;
-}
-
-.alerta-card:hover {
-  /* HOVER: Elevação */
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-strong);
-}
-
-/* CORES POR NÍVEL DE ALERTA */
-.alerta-card.alert-verde {
-  border-color: var(--alert-verde);
-  color: var(--alert-verde);
-}
-
-.alerta-card.alert-amarelo {
-  border-color: var(--alert-amarelo);
-  color: var(--alert-amarelo);
-}
-
-.alerta-card.alert-laranja {
-  border-color: var(--alert-laranja);
-  color: var(--alert-laranja);
-}
-
-.alerta-card.alert-vermelho {
-  border-color: var(--alert-vermelho);
-  color: var(--alert-vermelho);
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
-}
-
-.alerta-header {
-  /* HEADER: Info compacta */
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-}
-
-.alerta-icon {
-  /* ÍCONE: Emoji grande */
-  font-size: 1.5rem;
-}
-
-.alerta-estado {
-  /* ESTADO: Nome */
-  font-weight: 600;
-  color: var(--color-deep-blue);
-  font-family: var(--font-display);
-}
-
-.alerta-nivel {
-  /* NÍVEL: Badge */
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--border-radius-small);
-  font-size: 0.75rem;
-  font-weight: 600;
-  background: currentColor;
-  color: var(--color-tech-white);
-  margin-left: auto;
-}
-
-.alerta-card h3 {
-  /* TÍTULO: Impactante */
-  color: var(--color-deep-blue);
-  margin-bottom: var(--spacing-xs);
-  font-size: 1.25rem;
-}
-
-.alerta-card p {
-  /* DESCRIÇÃO: Clara */
-  color: var(--color-mid-gray);
-  margin-bottom: var(--spacing-md);
-  line-height: 1.5;
-}
-
-.alerta-actions {
-  /* AÇÕES: Botões */
-  display: flex;
-  gap: var(--spacing-sm);
-}
-
-/* === ESTADOS OVERVIEW === */
-.estados-overview {
-  /* SEÇÃO: Principal */
-  margin-bottom: var(--spacing-xl);
-}
-
-.estados-overview h2 {
-  /* TÍTULO: Seção */
-  color: var(--color-deep-blue);
-  font-size: 2rem;
-  margin-bottom: var(--spacing-lg);
-  text-align: center;
-}
-
-.estados-grid {
-  /* GRID: Estados */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--spacing-lg);
 }
 
-.estado-card {
-  /* CARD: Estado individual */
-  background: var(--color-tech-white);
-  border-radius: var(--border-radius);
+.tech-category {
+  /* CATEGORIA: Container para cada grupo */
+  background: var(--color-light-gray);
   padding: var(--spacing-md);
-  border: 2px solid;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  border-radius: var(--border-radius);
+  border-top: 4px solid var(--color-innovation-purple);
 }
 
-.estado-card::before {
-  /* BARRA: Indicador de risco */
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: currentColor;
-  opacity: 0.8;
-}
-
-.estado-card:hover {
-  /* HOVER: Interação */
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-strong);
-}
-
-/* CORES POR NÍVEL DE RISCO */
-.estado-card.risco-verde {
-  border-color: var(--alert-verde);
-  color: var(--alert-verde);
-}
-
-.estado-card.risco-amarelo {
-  border-color: var(--alert-amarelo);
-  color: var(--alert-amarelo);
-}
-
-.estado-card.risco-laranja {
-  border-color: var(--alert-laranja);
-  color: var(--alert-laranja);
-}
-
-.estado-card.risco-vermelho {
-  border-color: var(--alert-vermelho);
-  color: var(--alert-vermelho);
-  animation: pulse-red 2s infinite;
-}
-
-@keyframes pulse-red {
-  0%, 100% { box-shadow: 0 0 0 rgba(220, 38, 38, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
-}
-
-.estado-header {
-  /* HEADER: Estado + emoji */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-md);
-}
-
-.estado-header h3 {
-  /* SIGLA: Destaque */
-  font-size: 1.75rem;
+.tech-category h3 {
+  /* TÍTULO: Categoria tecnológica */
   color: var(--color-deep-blue);
-  margin: 0;
-  font-weight: 700;
-}
-
-.risco-emoji {
-  /* EMOJI: Status visual */
-  font-size: 2rem;
-}
-
-.estado-status {
-  /* STATUS: Info principal */
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-sm);
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: var(--border-radius-small);
-}
-
-.status-text {
-  /* TEXTO: Descrição */
-  color: var(--color-graphite);
-  font-weight: 500;
-  margin-bottom: var(--spacing-xs);
-}
-
-.nivel-badge {
-  /* BADGE: Nível */
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--border-radius-small);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-tech-white);
-}
-
-.nivel-badge.nivel-verde { background: var(--alert-verde); }
-.nivel-badge.nivel-amarelo { background: var(--alert-amarelo); }
-.nivel-badge.nivel-laranja { background: var(--alert-laranja); }
-.nivel-badge.nivel-vermelho { background: var(--alert-vermelho); }
-
-/* === RISCOS DETALHES === */
-.riscos-detalhes {
-  /* LAYOUT: Lista de riscos */
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-sm);
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: var(--border-radius-small);
-}
-
-.risco-item {
-  /* ITEM: Risco individual */
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-xs);
-}
-
-.risco-item:last-child {
-  margin-bottom: 0;
-}
-
-.risco-icon {
-  /* ÍCONE: Emoji */
   font-size: 1.25rem;
-  width: 24px;
+  margin-bottom: var(--spacing-md);
   text-align: center;
 }
 
-.risco-info {
-  /* INFO: Tipo + nível */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex: 1;
-}
-
-.risco-tipo {
-  /* TIPO: Nome */
-  color: var(--color-graphite);
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-.risco-nivel {
-  /* NÍVEL: Mini badge */
-  padding: 0.125rem 0.375rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-tech-white);
-}
-
-/* === EMERGÊNCIA DOMINANTE === */
-.emergencia-dominante {
-  /* DESTAQUE: Emergência principal */
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-sm);
-  background: rgba(220, 38, 38, 0.1);
-  border-radius: var(--border-radius-small);
-  margin-bottom: var(--spacing-md);
-  border-left: 4px solid var(--alert-vermelho);
-}
-
-.emergencia-icon {
-  /* ÍCONE: Emergência */
-  font-size: 1.25rem;
-}
-
-.emergencia-texto {
-  /* TEXTO: Descrição */
-  color: var(--alert-vermelho);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.estado-actions {
-  /* AÇÕES: Botões do card */
-  display: flex;
-  gap: var(--spacing-sm);
-}
-
-/* === DASHBOARD RESUMO === */
-.dashboard-resumo h2 {
-  /* TÍTULO: Seção */
-  color: var(--color-deep-blue);
-  font-size: 2rem;
-  margin-bottom: var(--spacing-lg);
-  text-align: center;
-}
-
-.resumo-grid {
-  /* GRID: Cards de resumo */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-lg);
-}
-
-.distribuicao-niveis,
-.tipos-emergencia {
-  /* LISTAS: Estatísticas */
+.tech-list {
+  /* LISTA: Tecnologias da categoria */
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
 }
 
-.nivel-stat,
-.tipo-stat {
-  /* ITEM: Estatística */
+.tech-item {
+  /* ITEM: Tecnologia individual */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.tech-item:hover {
+  /* HOVER: Elevação sutil */
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-light);
+}
+
+.tech-icon {
+  /* ÍCONE: Emoji grande */
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.tech-info {
+  /* INFO: Nome + descrição */
+  flex: 1;
+}
+
+.tech-info strong {
+  /* NOME: Tecnologia */
+  color: var(--color-deep-blue);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tech-info p {
+  /* DESCRIÇÃO: Função da tecnologia */
+  color: var(--color-mid-gray);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* === SEÇÃO METODOLOGIA === */
+.metodologia-content {
+  /* CONTEÚDO: Seções organizadas */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.algoritmo-overview {
+  /* OVERVIEW: Introdução da metodologia */
+  text-align: center;
+  padding: var(--spacing-md);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+}
+
+.algoritmo-overview h3 {
+  /* TÍTULO: Destaque */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.risk-types {
+  /* TIPOS: Grid de riscos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.risk-card {
+  /* CARD: Tipo de risco individual */
+  background: var(--color-tech-white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-light-gray);
+  transition: all 0.2s ease;
+}
+
+.risk-card:hover {
+  /* HOVER: Destaque */
+  border-color: var(--color-electric-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+}
+
+.risk-card h4 {
+  /* TÍTULO: Tipo de risco */
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-display);
+}
+
+.risk-card ul {
+  /* LISTA: Critérios */
+  margin: 0;
+  padding-left: var(--spacing-md);
+}
+
+.risk-card li {
+  /* ITEM: Critério específico */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  line-height: 1.4;
+}
+
+.risk-card li strong {
+  /* PARÂMETRO: Nome do critério */
+  color: var(--color-electric-blue);
+}
+
+/* === SISTEMA DE PONTUAÇÃO === */
+.scoring-system {
+  /* SISTEMA: Explicação das cores */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.scoring-system h3 {
+  /* TÍTULO: Centralizado */
+  text-align: center;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.score-explanation {
+  /* EXPLICAÇÃO: Lista de níveis */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.score-item {
+  /* ITEM: Faixa + nível */
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-xs);
+  gap: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-tech-white);
   border-radius: var(--border-radius-small);
-  background: rgba(0, 0, 0, 0.02);
 }
 
-.nivel-emoji,
-.tipo-emoji {
-  /* EMOJI: Visual */
-  font-size: 1.25rem;
-  width: 24px;
+.score-range {
+  /* FAIXA: Pontuação */
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  font-family: var(--font-display);
+  min-width: 100px;
   text-align: center;
+  color: var(--color-tech-white);
 }
 
-.nivel-nome,
-.tipo-nome {
-  /* NOME: Descrição */
-  flex: 1;
+.score-range.verde { background: var(--alert-verde); }
+.score-range.amarelo { background: var(--alert-amarelo); }
+.score-range.laranja { background: var(--alert-laranja); }
+.score-range.vermelho { background: var(--alert-vermelho); }
+
+.score-level {
+  /* NÍVEL: Descrição */
   font-weight: 500;
   color: var(--color-graphite);
 }
 
-.nivel-count,
-.tipo-count {
-  /* COUNT: Número */
-  font-weight: 600;
-  color: var(--color-electric-blue);
-  font-family: var(--font-display);
+/* === SEÇÃO DESENVOLVIMENTO === */
+.processo-timeline {
+  /* TIMELINE: Linha do tempo */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
-/* === SISTEMA INFO === */
-.sistema-info {
-  /* INFO: Status do sistema */
-  text-align: center;
+.timeline-item {
+  /* ITEM: Etapa do processo */
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
 }
 
-.sistema-status {
-  /* STATUS: Online/offline */
+.timeline-marker {
+  /* MARCADOR: Número da etapa */
+  width: 40px;
+  height: 40px;
+  background: var(--color-electric-blue);
+  color: var(--color-tech-white);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
+  font-weight: 700;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.timeline-content {
+  /* CONTEÚDO: Descrição da etapa */
+  flex: 1;
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-electric-blue);
+}
+
+.timeline-content h3 {
+  /* TÍTULO: Etapa */
+  color: var(--color-deep-blue);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.timeline-content p {
+  /* DESCRIÇÃO: Detalhes */
+  color: var(--color-graphite);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* === DESAFIOS === */
+.desafios-box {
+  /* BOX: Destaque para desafios */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-innovation-purple);
+}
+
+.desafios-box h3 {
+  /* TÍTULO: Desafios */
+  color: var(--color-deep-blue);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.desafios-grid {
+  /* GRID: Cards de desafios */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.desafio-item {
+  /* ITEM: Desafio individual */
+  background: var(--color-tech-white);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.desafio-item h4 {
+  /* TÍTULO: Nome do desafio */
+  color: var(--color-innovation-purple);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.desafio-item p {
+  /* DESCRIÇÃO: Explicação */
+  color: var(--color-graphite);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* === SEÇÃO LIMITAÇÕES === */
+.consideracoes-content {
+  /* CONTEÚDO: Layout de considerações */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.dados-info {
+  /* INFO: Fonte dos dados */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.dados-info h3 {
+  /* TÍTULO: Seção */
+  color: var(--color-deep-blue);
   margin-bottom: var(--spacing-sm);
 }
 
-.sistema-status.online .status-dot {
-  /* DOT: Verde pulsante */
-  width: 12px;
-  height: 12px;
-  background: var(--alert-verde);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
+.fontes-list {
+  /* LISTA: Fontes científicas */
+  margin-top: var(--spacing-md);
 }
 
-.ultima-atualizacao {
-  /* TIMESTAMP: Pequeno */
-  color: var(--color-mid-gray);
-  font-size: 0.85rem;
+.fonte-item {
+  /* ITEM: Fonte individual */
+  padding: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius-small);
+  border-left: 3px solid var(--color-data-green);
+  font-size: 0.9rem;
+}
+
+.futuras-melhorias {
+  /* MELHORIAS: Evoluções possíveis */
+  background: var(--color-light-gray);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+}
+
+.futuras-melhorias h3 {
+  /* TÍTULO: Futuro */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.futuras-melhorias ul {
+  /* LISTA: Ideias futuras */
+  margin: 0;
+  padding-left: var(--spacing-md);
+}
+
+.futuras-melhorias li {
+  /* ITEM: Melhoria específica */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  line-height: 1.4;
+}
+
+/* === FOOTER PROJETO === */
+.projeto-footer {
+  /* FOOTER: Informações finais */
+  border-top: 2px solid var(--color-light-gray);
+  padding-top: var(--spacing-lg);
+}
+
+.footer-content {
+  /* CONTEÚDO: Layout do footer */
+  text-align: center;
+}
+
+.footer-content h3 {
+  /* TÍTULO: Footer */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.projeto-meta {
+  /* META: Informações do projeto */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.meta-item {
+  /* ITEM: Informação específica */
+  padding: var(--spacing-xs);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+  font-size: 0.9rem;
+}
+
+.meta-item strong {
+  /* LABEL: Categoria */
+  color: var(--color-electric-blue);
+}
+
+.tecnologias-footer {
+  /* TECNOLOGIAS: Stack resumida */
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: var(--color-light-gray);
+  border-radius: var(--border-radius-small);
+}
+
+.tecnologias-footer p {
+  /* TEXTO: Informação técnica */
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-graphite);
+  font-size: 0.9rem;
+}
+
+.tecnologias-footer p:last-child {
+  margin-bottom: 0;
 }
 
 /* === RESPONSIVIDADE === */
+@media (max-width: 1024px) {
+  .tech-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .consideracoes-content {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2rem;
+  .projeto-section .content-grid {
+    grid-template-columns: 1fr;
   }
   
-  .stats-quick {
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .risk-types {
+    grid-template-columns: 1fr;
+  }
+  
+  .timeline-item {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
   
-  .alertas-grid,
-  .estados-grid {
+  .timeline-marker {
+    margin: 0 auto var(--spacing-sm) auto;
+  }
+  
+  .desafios-grid {
     grid-template-columns: 1fr;
   }
   
-  .resumo-grid {
+  .projeto-meta {
     grid-template-columns: 1fr;
   }
-}
-
-/* === ANIMAÇÕES === */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .score-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-xs);
   }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+@media (max-width: 480px) {
+  .stats-box {
+    text-align: center;
+  }
+  
+  .tech-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .tech-icon {
+    margin: 0 auto var(--spacing-xs) auto;
+  }
 }
