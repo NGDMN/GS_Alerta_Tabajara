@@ -1,61 +1,200 @@
-/* ===== ESTILOS ESPECÍFICOS DO APP ===== */
+/* src/App.css */
 
 .App {
+  /* LAYOUT: Flexbox vertical que ocupa toda a altura */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
+  /* BACKGROUND: Base neutra GSX */
+  background-color: var(--color-tech-white);
 }
 
-.app-header {
-  background: linear-gradient(135deg, var(--color-deep-blue) 0%, var(--color-electric-blue) 100%);
-  padding: 4rem 2rem;
+/* === MAIN CONTENT === */
+.main-content {
+  /* FLEX: Cresce para ocupar espaço disponível */
+  flex: 1;
+  
+  /* SPACING: Padding para respirar */
+  padding: var(--spacing-lg) 0;
+  
+  /* MIN-HEIGHT: Garante espaço mínimo */
+  min-height: calc(100vh - 200px);
+}
+
+/* === 404 ERROR PAGE === */
+.page-not-found {
+  /* LAYOUT: Centraliza verticalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.error-content {
+  /* VISUAL: Card centralizado */
   text-align: center;
-  color: white;
-  min-height: 100vh;
+  padding: var(--spacing-xl);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  border: 1px solid var(--color-light-gray);
+}
+
+.error-content h1 {
+  /* TÍTULO: Cor GSX mas não dramático */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-md);
+  font-size: 2rem;
+}
+
+.error-content p {
+  /* TEXTO: Explicação clara */
+  color: var(--color-mid-gray);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.1rem;
+}
+
+/* === FOOTER === */
+.app-footer {
+  /* BACKGROUND: Sutil, não compete com header */
+  background: var(--color-light-gray);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  
+  /* SPACING: Compacto */
+  padding: var(--spacing-md) 0;
+  
+  /* POSITION: Sempre no final */
+  margin-top: auto;
+}
+
+.footer-content {
+  /* LAYOUT: Texto centralizado */
+  text-align: center;
+}
+
+.footer-content p {
+  /* TIPOGRAFIA: Pequeno e discreto */
+  font-size: 0.85rem;
+  color: var(--color-mid-gray);
+  margin-bottom: 0.25rem;
+  font-family: var(--font-body);
+}
+
+.footer-content p:last-child {
+  /* ÚLTIMO P: Sem margin */
+  margin-bottom: 0;
+  font-weight: 500;
+  color: var(--color-electric-blue);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .main-content {
+    /* MOBILE: Menos padding */
+    padding: var(--spacing-md) 0;
+  }
+  
+  .error-content {
+    /* ERROR: Menos padding em mobile */
+    padding: var(--spacing-lg);
+    margin: 0 var(--spacing-sm);
+  }
+  
+  .error-content h1 {
+    /* TÍTULO: Menor em mobile */
+    font-size: 1.5rem;
+  }
+}
+
+/* === PÁGINAS GERAIS === */
+.page-container {
+  /* CONTAINER: Wrapper padrão para todas as páginas */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.page-header {
+  /* HEADER DE PÁGINA: Introdução consistente */
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg) 0;
+}
+
+.page-header h1 {
+  /* TÍTULO: Grande e impactante */
+  font-size: 2.5rem;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-header p {
+  /* SUBTITLE: Explicação clara */
+  font-size: 1.2rem;
+  color: var(--color-mid-gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* === LOADING STATES === */
+.loading-container {
+  /* LOADING: Centralizado */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
+  gap: var(--spacing-sm);
 }
 
-.app-title {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--color-tech-white);
+.loading-spinner {
+  /* SPINNER: Animação customizada */
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-light-gray);
+  border-top-color: var(--color-electric-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.highlight {
-  color: var(--color-data-green);
-}
-
-.app-subtitle {
+.loading-text {
+  /* TEXTO: Feedback para usuário */
+  color: var(--color-mid-gray);
   font-family: var(--font-body);
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin-bottom: 3rem;
-  opacity: 0.9;
+  font-size: 1rem;
 }
 
-.status-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 400px;
-  text-align: center;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.status-card h3 {
-  color: var(--color-data-green);
-  margin-bottom: 0.5rem;
-  font-family: var(--font-display);
+/* === ANIMAÇÕES DE ENTRADA === */
+.page-enter {
+  /* ANIMAÇÃO: Entrada suave das páginas */
+  animation: pageSlideIn 0.3s ease-out;
 }
 
-.status-card p {
-  color: white;
-  opacity: 0.9;
-  font-family: var(--font-body);
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+/* === UTILITÁRIOS === */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-small { margin-bottom: var(--spacing-sm); }
+.mb-medium { margin-bottom: var(--spacing-md); }
+.mb-large { margin-bottom: var(--spacing-lg); }
+
+.mt-small { margin-top: var(--spacing-sm); }
+.mt-medium { margin-top: var(--spacing-md); }
+.mt-large { margin-top: var(--spacing-lg); }

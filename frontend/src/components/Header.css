@@ -1,0 +1,214 @@
+/* src/components/Header.css */
+
+.header {
+  /* BACKGROUND: Gradiente GSX que nunca muda */
+  background: linear-gradient(135deg, 
+    var(--color-deep-blue) 0%, 
+    var(--color-electric-blue) 100%
+  );
+  
+  /* LAYOUT: Grudado no topo da página */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  /* VISUAL: Sombra sutil para separar do conteúdo */
+  box-shadow: var(--shadow-light);
+  
+  /* SPACING: Padding vertical controlado */
+  padding: var(--spacing-sm) 0;
+}
+
+.header-content {
+  /* FLEXBOX: Distribui logo, nav e status */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+/* === LOGO SECTION === */
+.logo {
+  /* RESPONSIVO: Nunca quebra, sempre prioritário */
+  flex-shrink: 0;
+}
+
+.logo-link {
+  /* REMOVE: Sublinhado padrão dos links */
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-link:hover {
+  /* HOVER: Efeito sutil que não compete com nav */
+  opacity: 0.9;
+}
+
+.logo h1 {
+  /* TIPOGRAFIA: Space Grotesk sempre para títulos */
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-tech-white);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.highlight {
+  /* COR DE DESTAQUE: Verde data sempre */
+  color: var(--color-data-green);
+}
+
+.tagline {
+  /* SUBTÍTULO: Menor, mais sutil */
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-tech-white);
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* === NAVIGATION === */
+.navigation {
+  /* FLEXBOX: Links em linha com espaçamento */
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.nav-link {
+  /* BASE: Baseado no sistema de botões GSX */
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.5rem var(--spacing-sm);
+  border-radius: var(--border-radius-small);
+  transition: all 0.2s ease;
+  
+  /* CORES: Branco por padrão */
+  color: var(--color-tech-white);
+  border: 1px solid transparent;
+  
+  /* TIPOGRAFIA: Tamanho legível */
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  /* HOVER: Borda verde + fundo sutil */
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-data-green);
+  color: var(--color-data-green);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  /* ATIVO: Verde sólido + texto escuro para contraste */
+  background: var(--color-data-green);
+  color: var(--color-deep-blue);
+  font-weight: 600;
+  border-color: var(--color-data-green);
+}
+
+.nav-link.active:hover {
+  /* ATIVO HOVER: Mais intenso */
+  background: var(--color-data-green);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* === SYSTEM STATUS === */
+.system-status {
+  /* POSIÇÃO: Lado direito, flexível */
+  flex-shrink: 0;
+}
+
+.status-indicator {
+  /* LAYOUT: Dot + texto alinhados */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.status-dot {
+  /* DOT: Pequeno círculo animado */
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-data-green);
+  animation: pulse 2s infinite;
+}
+
+.status-text {
+  /* TEXTO: Pequeno e discreto */
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-tech-white);
+  font-weight: 500;
+}
+
+/* ANIMAÇÃO: Pulsa para indicar "vivo" */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .header-content {
+    /* MOBILE: Stack vertical se necessário */
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  
+  .logo h1 {
+    /* LOGO: Menor em mobile */
+    font-size: 1.25rem;
+  }
+  
+  .tagline {
+    /* TAGLINE: Esconde em telas muito pequenas */
+    display: none;
+  }
+  
+  .navigation {
+    /* NAV: Menos espaço entre links */
+    gap: 0.25rem;
+  }
+  
+  .nav-link {
+    /* LINKS: Padding menor em mobile */
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .system-status {
+    /* STATUS: Esconde em mobile se necessário */
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    /* MOBILE PEQUENO: Stack vertical */
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .nav-link {
+    /* LINKS: Full width em mobile pequeno */
+    text-align: center;
+    width: 100%;
+  }
+}

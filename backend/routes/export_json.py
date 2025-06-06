@@ -7,7 +7,7 @@ from risk_calculator import analisar_todos_estados
 # ===== CONFIGURAÇÕES =====
 
 # Pasta onde serão salvos os JSONs (relativa ao script)
-OUTPUT_DIR = "../../frontend/src/data"
+OUTPUT_DIR = "../../frontend/public/data"
 BACKUP_DIR = "exports_backup"
 
 # Arquivos de saída

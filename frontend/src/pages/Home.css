@@ -1,0 +1,539 @@
+/* src/pages/Home.css */
+
+.home {
+  /* ANIMAÇÃO: Entrada suave */
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* === HERO SECTION === */
+.hero-section {
+  /* BACKGROUND: Gradiente sutil */
+  background: linear-gradient(135deg, 
+    var(--color-tech-white) 0%, 
+    var(--color-light-gray) 100%
+  );
+  
+  /* LAYOUT: Centralizado */
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  margin-bottom: var(--spacing-xl);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hero-content h1 {
+  /* TÍTULO: Impactante */
+  font-size: 3rem;
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 700;
+}
+
+.hero-content p {
+  /* SUBTÍTULO: Explicativo */
+  font-size: 1.3rem;
+  color: var(--color-mid-gray);
+  margin-bottom: var(--spacing-lg);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* === ESTATÍSTICAS RÁPIDAS === */
+.stats-quick {
+  /* LAYOUT: Grid horizontal */
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.stat-item {
+  /* LAYOUT: Vertical */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  min-width: 120px;
+}
+
+.stat-number {
+  /* NÚMERO: Grande e chamativo */
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.stat-label {
+  /* LABEL: Pequeno e explicativo */
+  font-size: 0.9rem;
+  color: var(--color-mid-gray);
+  font-weight: 500;
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+/* === ALERTAS CRÍTICOS === */
+.alertas-criticos {
+  /* SPACING: Seção destacada */
+  margin-bottom: var(--spacing-xl);
+}
+
+.alertas-criticos h2 {
+  /* TÍTULO: Urgente */
+  color: var(--alert-vermelho);
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.alertas-grid {
+  /* GRID: Responsivo */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.alerta-card {
+  /* CARD: Base para alertas */
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 2px solid;
+  background: var(--color-tech-white);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.alerta-card::before {
+  /* BARRA: Indicador visual no topo */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: currentColor;
+}
+
+.alerta-card:hover {
+  /* HOVER: Elevação */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* CORES POR NÍVEL DE ALERTA */
+.alerta-card.alert-verde {
+  border-color: var(--alert-verde);
+  color: var(--alert-verde);
+}
+
+.alerta-card.alert-amarelo {
+  border-color: var(--alert-amarelo);
+  color: var(--alert-amarelo);
+}
+
+.alerta-card.alert-laranja {
+  border-color: var(--alert-laranja);
+  color: var(--alert-laranja);
+}
+
+.alerta-card.alert-vermelho {
+  border-color: var(--alert-vermelho);
+  color: var(--alert-vermelho);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+}
+
+.alerta-header {
+  /* HEADER: Info compacta */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.alerta-icon {
+  /* ÍCONE: Emoji grande */
+  font-size: 1.5rem;
+}
+
+.alerta-estado {
+  /* ESTADO: Nome */
+  font-weight: 600;
+  color: var(--color-deep-blue);
+  font-family: var(--font-display);
+}
+
+.alerta-nivel {
+  /* NÍVEL: Badge */
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-small);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: currentColor;
+  color: var(--color-tech-white);
+  margin-left: auto;
+}
+
+.alerta-card h3 {
+  /* TÍTULO: Impactante */
+  color: var(--color-deep-blue);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.25rem;
+}
+
+.alerta-card p {
+  /* DESCRIÇÃO: Clara */
+  color: var(--color-mid-gray);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.alerta-actions {
+  /* AÇÕES: Botões */
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* === ESTADOS OVERVIEW === */
+.estados-overview {
+  /* SEÇÃO: Principal */
+  margin-bottom: var(--spacing-xl);
+}
+
+.estados-overview h2 {
+  /* TÍTULO: Seção */
+  color: var(--color-deep-blue);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.estados-grid {
+  /* GRID: Estados */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.estado-card {
+  /* CARD: Estado individual */
+  background: var(--color-tech-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  border: 2px solid;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.estado-card::before {
+  /* BARRA: Indicador de risco */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.estado-card:hover {
+  /* HOVER: Interação */
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* CORES POR NÍVEL DE RISCO */
+.estado-card.risco-verde {
+  border-color: var(--alert-verde);
+  color: var(--alert-verde);
+}
+
+.estado-card.risco-amarelo {
+  border-color: var(--alert-amarelo);
+  color: var(--alert-amarelo);
+}
+
+.estado-card.risco-laranja {
+  border-color: var(--alert-laranja);
+  color: var(--alert-laranja);
+}
+
+.estado-card.risco-vermelho {
+  border-color: var(--alert-vermelho);
+  color: var(--alert-vermelho);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 rgba(220, 38, 38, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+}
+
+.estado-header {
+  /* HEADER: Estado + emoji */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.estado-header h3 {
+  /* SIGLA: Destaque */
+  font-size: 1.75rem;
+  color: var(--color-deep-blue);
+  margin: 0;
+  font-weight: 700;
+}
+
+.risco-emoji {
+  /* EMOJI: Status visual */
+  font-size: 2rem;
+}
+
+.estado-status {
+  /* STATUS: Info principal */
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-small);
+}
+
+.status-text {
+  /* TEXTO: Descrição */
+  color: var(--color-graphite);
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.nivel-badge {
+  /* BADGE: Nível */
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-small);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-tech-white);
+}
+
+.nivel-badge.nivel-verde { background: var(--alert-verde); }
+.nivel-badge.nivel-amarelo { background: var(--alert-amarelo); }
+.nivel-badge.nivel-laranja { background: var(--alert-laranja); }
+.nivel-badge.nivel-vermelho { background: var(--alert-vermelho); }
+
+/* === RISCOS DETALHES === */
+.riscos-detalhes {
+  /* LAYOUT: Lista de riscos */
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-small);
+}
+
+.risco-item {
+  /* ITEM: Risco individual */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.risco-item:last-child {
+  margin-bottom: 0;
+}
+
+.risco-icon {
+  /* ÍCONE: Emoji */
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+.risco-info {
+  /* INFO: Tipo + nível */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.risco-tipo {
+  /* TIPO: Nome */
+  color: var(--color-graphite);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.risco-nivel {
+  /* NÍVEL: Mini badge */
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-tech-white);
+}
+
+/* === EMERGÊNCIA DOMINANTE === */
+.emergencia-dominante {
+  /* DESTAQUE: Emergência principal */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: var(--border-radius-small);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid var(--alert-vermelho);
+}
+
+.emergencia-icon {
+  /* ÍCONE: Emergência */
+  font-size: 1.25rem;
+}
+
+.emergencia-texto {
+  /* TEXTO: Descrição */
+  color: var(--alert-vermelho);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.estado-actions {
+  /* AÇÕES: Botões do card */
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* === DASHBOARD RESUMO === */
+.dashboard-resumo h2 {
+  /* TÍTULO: Seção */
+  color: var(--color-deep-blue);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.resumo-grid {
+  /* GRID: Cards de resumo */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.distribuicao-niveis,
+.tipos-emergencia {
+  /* LISTAS: Estatísticas */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.nivel-stat,
+.tipo-stat {
+  /* ITEM: Estatística */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-small);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.nivel-emoji,
+.tipo-emoji {
+  /* EMOJI: Visual */
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+.nivel-nome,
+.tipo-nome {
+  /* NOME: Descrição */
+  flex: 1;
+  font-weight: 500;
+  color: var(--color-graphite);
+}
+
+.nivel-count,
+.tipo-count {
+  /* COUNT: Número */
+  font-weight: 600;
+  color: var(--color-electric-blue);
+  font-family: var(--font-display);
+}
+
+/* === SISTEMA INFO === */
+.sistema-info {
+  /* INFO: Status do sistema */
+  text-align: center;
+}
+
+.sistema-status {
+  /* STATUS: Online/offline */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.sistema-status.online .status-dot {
+  /* DOT: Verde pulsante */
+  width: 12px;
+  height: 12px;
+  background: var(--alert-verde);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.ultima-atualizacao {
+  /* TIMESTAMP: Pequeno */
+  color: var(--color-mid-gray);
+  font-size: 0.85rem;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .stats-quick {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .alertas-grid,
+  .estados-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .resumo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === ANIMAÇÕES === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
