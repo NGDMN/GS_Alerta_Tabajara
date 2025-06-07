@@ -1,4 +1,4 @@
-// src/pages/Home.jsx - VERSÃO FINAL COM VÍDEO
+// src/pages/Home.jsx - VERSÃO FINAL COM VÍDEO DO YOUTUBE
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 
@@ -15,20 +15,14 @@ function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // ===== FUNÇÃO: Simular reprodução de vídeo =====
+  // ===== FUNÇÃO: Iniciar reprodução do vídeo do YouTube =====
   const handleVideoPlay = () => {
-    if (!videoTocando) {
-      setVideoTocando(true);
-      // Simula vídeo de 3 minutos
-      setTimeout(() => {
-        alert('🎬 Vídeo "GSX Alerta Tabajara - Como Não Morrer em 2025" concluído!\n\n' +
-              '⏱️ Duração: 3 minutos\n' +
-              '🎯 Conteúdo: Apresentação institucional do sistema\n' +
-              '📊 Demonstração das funcionalidades principais\n\n' +
-              '🔄 Em breve, vídeo real será inserido aqui!');
-        setVideoTocando(false);
-      }, 3000); // 3 segundos simulando 3 minutos
-    }
+    setVideoTocando(true);
+  };
+
+  // ===== FUNÇÃO: Parar vídeo (caso necessário) =====
+  const handleVideoStop = () => {
+    setVideoTocando(false);
   };
 
   return (
@@ -108,26 +102,40 @@ function Home() {
                   </div>
                 ) : (
                   <div className="video-playing">
-                    <div className="loading-video">
-                      <div className="video-progress">
-                        <div className="progress-bar"></div>
-                      </div>
-                      <div className="playing-content">
-                        <h3>🎬 Reproduzindo...</h3>
-                        <p>"Bem-vindos ao Sistema GSX Alerta Tabajara, onde a tecnologia de ponta encontra a criatividade brasileira para salvar vidas!"</p>
-                        <div className="video-controls">
-                          <span className="time-indicator">⏱️ 00:03 / 03:00</span>
-                          <span className="quality-indicator">🎥 HD Quality</span>
-                        </div>
-                      </div>
-                    </div>
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/avRgbicQqoQ?autoplay=1&rel=0&modestbranding=1"
+                      title="GSX Alerta Tabajara - Apresentação do Sistema"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{
+                        borderRadius: 'var(--border-radius)',
+                        backgroundColor: 'var(--color-graphite)'
+                      }}
+                    ></iframe>
                   </div>
                 )}
               </div>
               <div className="video-caption">
                 <small>
-                  💡 <strong>Dica:</strong> Este é um placeholder. O vídeo final será criado com IA 
-                  no estilo "Tabajara" para apresentação do projeto.
+                  💡 <strong>Vídeo Oficial:</strong> Apresentação completa do sistema GSX Alerta Tabajara 
+                  {videoTocando && (
+                    <span> | <button 
+                      onClick={handleVideoStop} 
+                      style={{
+                        background: 'none', 
+                        border: 'none', 
+                        color: 'var(--color-electric-blue)', 
+                        cursor: 'pointer',
+                        textDecoration: 'underline',
+                        fontSize: 'inherit'
+                      }}
+                    >
+                      ⏹️ Voltar ao thumbnail
+                    </button></span>
+                  )}
                 </small>
               </div>
             </div>
